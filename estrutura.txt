@@ -1,0 +1,19 @@
+pronto-psi/
+├── assets/
+│   ├── css/
+│   │   ├── admin-style.css
+│   │   └── style.css
+│   └── js/
+│       ├── admin-script.js
+│       └── script.js
+├── includes/
+│   ├── admin-menu.php
+│   ├── functions.php
+│   ├── shortcodes.php
+│   ├── install.php
+│   └── pages/
+│       ├── prontuario.php
+│       ├── atendimento.php
+│       ├── anotações.php
+│       └── encaminhamentos.php
+└── pronto-psi.php
