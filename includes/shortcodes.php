@@ -1,4 +1,5 @@
 <?php
+// /includes/shortcodes.php
 function pronto_psi_shortcode_prontuario() {
     ob_start();
     pronto_psi_prontuario_page(); // Reutilizar a função da página de administração

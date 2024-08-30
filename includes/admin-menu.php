@@ -1,4 +1,5 @@
 <?php
+// /includes/admin-page.php
 
 function pronto_psi_add_admin_menu()
 {

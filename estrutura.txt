@@ -1,3 +1,5 @@
+Estrutura:
+
 pronto-psi/
 ├── assets/
 │   ├── css/
