@@ -1,4 +1,3 @@
-
 # Pronto Psi
 
 **Pronto Psi** é um plugin desenvolvido para WordPress que oferece uma solução de prontuário eletrônico voltada para profissionais de psicologia. Este plugin permite o gerenciamento completo dos registros de pacientes, consultas e informações clínicas, proporcionando um fluxo de trabalho simplificado e seguro para clínicas e consultórios.
@@ -10,6 +9,8 @@
 - **Encaminhamentos:** Gerenciamento de encaminhamentos para outros profissionais ou serviços.
 - **Modal de Dados Clínicos:** Visualização e edição de informações clínicas de cada paciente.
 - **Integração com Bookly:** Reutilização de dados da tabela `wp_bookly_customers` para preenchimento automático.
+
+![alt text](/includes/img/image.png)
 
 ## 📦 Estrutura do Projeto
 
@@ -41,6 +42,7 @@ pronto-psi/
 ## 🚀 Instalação
 
 1. Faça o download ou clone o repositório:
+
    ```bash
    git clone https://github.com/jucivanfreitas/pronto-psi.git
    ```
@@ -77,6 +79,8 @@ Este projeto está licenciado sob a licença MIT. Veja o arquivo `LICENSE` para 
 
 ## 📞 Contato
 
+- **Quer ter o Seu Plug-in Personalizado?**
 - **Autor:** Jucivan Freitas
+- **E-Mail:** devdatavisio@gmail.com
 - **Empresa:** DevDataVisio
 - **Website:** [www.datavisio.store](https://www.datavisio.store)
