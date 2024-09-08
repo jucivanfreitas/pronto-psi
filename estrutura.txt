@@ -18,4 +18,7 @@ pronto-psi/
 │       ├── atendimento.php
 │       ├── anotações.php
 │       └── encaminhamentos.php
+│         └── modal/
+│            ├── dados-clinicos.php
+│            ├── functions_modal_dados_clinicos.php
 └── pronto-psi.php

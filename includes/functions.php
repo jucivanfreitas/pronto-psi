@@ -12,7 +12,7 @@ function pronto_psi_update_tables() {
     $table_name = $wpdb->prefix . 'pronto_psi_clientes';
     $sql = "CREATE TABLE $table_name (
         id INT(11) NOT NULL AUTO_INCREMENT,
-        bookly_user_id BIGINT(20) NOT NULL UNIQUE,  /* ID do cliente da tabela wp_bookly_customers */
+        bookly_user_id BIGINT(20) UNSIGNED NOT NULL,  /* ID do cliente da tabela wp_bookly_customers */
         full_name VARCHAR(128) NOT NULL,
         genero VARCHAR(20) DEFAULT NULL,
         estado_civil VARCHAR(20) DEFAULT NULL,
@@ -25,7 +25,10 @@ function pronto_psi_update_tables() {
         diagnostico TEXT DEFAULT NULL,
         tratamento_anterior TEXT DEFAULT NULL,
         medicacoes_uso TEXT DEFAULT NULL,
-        PRIMARY KEY  (id)
+        PRIMARY KEY (id),
+        UNIQUE KEY bookly_user_id (bookly_user_id),
+        CONSTRAINT fk_bookly_user_id FOREIGN KEY (bookly_user_id) REFERENCES {$wpdb->prefix}bookly_customers(id)
+            ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB $charset_collate;";
 
     // Tabela para dados de atendimentos
@@ -42,7 +45,7 @@ function pronto_psi_update_tables() {
         observacoes TEXT DEFAULT NULL,
         pontos_pos_e_melhorias TEXT DEFAULT NULL,
         reacoes_respostas TEXT DEFAULT NULL,
-        PRIMARY KEY  (id),
+        PRIMARY KEY (id),
         FOREIGN KEY (prontuario_id) REFERENCES {$wpdb->prefix}pronto_psi_clientes(id)
             ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB $charset_collate;";
@@ -58,7 +61,7 @@ function pronto_psi_update_tables() {
         motivo_encaminhamento TEXT DEFAULT NULL,
         status_encaminhamento VARCHAR(20) DEFAULT NULL,
         observacoes TEXT DEFAULT NULL,
-        PRIMARY KEY  (id),
+        PRIMARY KEY (id),
         FOREIGN KEY (atendimento_id) REFERENCES {$wpdb->prefix}pronto_psi_atendimentos(id)
             ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB $charset_collate;";
@@ -68,21 +71,10 @@ function pronto_psi_update_tables() {
     dbDelta($sql);
 }
 
-/**
- * Verifica a versão do plug-in e atualiza o banco de dados se necessário.
- */
-function pronto_psi_check_version() {
-    $current_version = get_option('pronto_psi_version');
-
-    if ($current_version !== PRONTO_PSI_VERSION) {
-        pronto_psi_update_tables();
-        update_option('pronto_psi_version', PRONTO_PSI_VERSION);
-    }
+function pronto_psi_enqueue_scripts() {
+    wp_enqueue_script('jquery');
 }
-
-// Aciona a verificação de versão ao inicializar o plug-in
-add_action('plugins_loaded', 'pronto_psi_check_version');
-
+add_action('wp_enqueue_scripts', 'pronto_psi_enqueue_scripts');
 
 
 ?>

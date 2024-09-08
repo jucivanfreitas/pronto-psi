@@ -23,20 +23,19 @@ echo '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstr
 
 // Exibir o título da página
 echo '<div class="container mt-5">';
-echo '<h2 class="text-center">' . __('Gerenciamento de Clientes Ativos', 'pronto-psi') . '</h2>';
+echo '<h2 class="text-center">' . __('Gerenciamento de Cadastro Clínico Para Pacientes', 'pronto-psi') . '</h2>';
 
-// Formulário de cadastro/atualização de clientes com efeito sanfona
-echo '<div id="accordion" class="mt-4">';
-echo '<div class="card">';
+// Centralizar o card de formulário de cadastro/atualização de clientes
+echo '<div class="d-flex justify-content-center mt-4">';
+echo '<div class="card" style="width: 100%; max-width: 600px;">'; // Define uma largura máxima e centraliza o card
+
 echo '<div class="card-header" id="headingOne">';
 echo '<h5 class="mb-0">';
-echo '<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">';
-echo __('Cadastro/Atualização de Atendimento', 'pronto-psi');
-echo '</button>';
+echo '<span class="h4 text-primary">' . __('Cadastro de Cliente como Paciente', 'pronto-psi') . '</span>';
 echo '</h5>';
 echo '</div>';
 
-echo '<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">';
+echo '<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">';
 echo '<div class="card-body">';
 echo '<form id="formCliente" method="POST" action="">';
 
@@ -52,12 +51,10 @@ foreach ($clientes_disponiveis as $cliente_disponivel) {
 echo '</select>';
 echo '</div>';
 
-// (Outros campos do formulário...)
-
 // Botões de ação: Salvar Cliente e Cadastrar Novo Cliente
 echo '<div class="d-flex justify-content-between mt-3">';
 echo '<button type="submit" class="btn btn-primary btn-sm d-flex align-items-center" style="flex: 1; margin-right: 5px;" name="submit">';
-echo '<i class="fas fa-save mr-2"></i>' . __('Salvar Cliente', 'pronto-psi');
+echo '<i class="fas fa-save mr-2"></i>' . __('Adicionar Paciente', 'pronto-psi');
 echo '</button>';
 echo '<button type="button" class="btn btn-success btn-sm d-flex align-items-center" style="flex: 1;" onclick="window.location.href=\'' . $bookly_customers_page_url . '\'">';
 echo '<i class="fas fa-user-plus mr-2"></i>' . __('Cadastrar Novo Cliente', 'pronto-psi');
@@ -68,37 +65,53 @@ echo '</form>';
 echo '</div>';
 echo '</div>';
 echo '</div>';
-echo '</div>'; // fim do accordion
+echo '</div>'; // Fim da centralização do card
 
 // Verificação se o formulário foi submetido
 if (isset($_POST['submit'])) {
     $full_name_id = sanitize_text_field($_POST['full_name']);
 
-    // Inserir ou atualizar os dados na tabela pronto_psi_clientes
-    $wpdb->replace(
-        "{$wpdb->prefix}pronto_psi_clientes",
-        [
-            'bookly_user_id' => $full_name_id,
-            'full_name' => $wpdb->get_var($wpdb->prepare("SELECT full_name FROM {$wpdb->prefix}bookly_customers WHERE id = %d", $full_name_id)),
-        ],
-        ['%d', '%s']
+    // Verificar se já existe um registro com o mesmo nome e ID
+    $existing_client = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}pronto_psi_clientes WHERE bookly_user_id = %d",
+            $full_name_id
+        )
     );
 
-    // Exibir uma mensagem de confirmação
-    echo '<div class="alert alert-success mt-4">' . __('Cliente salvo com sucesso!', 'pronto-psi') . '</div>';
+    if ($existing_client) {
+        // Exibir uma mensagem de erro se o cliente já existir
+        echo '<div class="alert alert-danger mt-4">' . __('Cliente já cadastrado!', 'pronto-psi') . '</div>';
+    } else {
+        // Inserir os dados na tabela pronto_psi_clientes se não existirem
+        $wpdb->insert(
+            "{$wpdb->prefix}pronto_psi_clientes",
+            [
+                'bookly_user_id' => $full_name_id,
+                'full_name' => $wpdb->get_var($wpdb->prepare("SELECT full_name FROM {$wpdb->prefix}bookly_customers WHERE id = %d", $full_name_id)),
+            ],
+            ['%d', '%s']
+        );
 
-    // Atualizar a listagem de clientes automaticamente
-    echo '<script>location.reload();</script>';
+        // Exibir uma mensagem de confirmação
+        echo '<div class="alert alert-success mt-4">' . __('Cliente adicionado com sucesso!', 'pronto-psi') . '</div>';
+
+        // Atualizar a listagem de clientes automaticamente
+        echo '<script>location.reload();</script>';
+    }
 }
 
 // Exibir a tabela com a lista de clientes e função de busca
 echo '<h3 class="mt-5">' . __('Lista de Clientes', 'pronto-psi') . '</h3>';
-echo '<div class="form-group">';
-echo '<input type="text" class="form-control" id="searchCliente" placeholder="' . __('Buscar Cliente...', 'pronto-psi') . '">';
-echo '</div>';
 echo '<table class="table table-bordered table-striped mt-3">';
 echo '<thead class="thead-dark">';
-echo '<tr><th>' . __('Nome', 'pronto-psi') . '</th><th>' . __('Responsável', 'pronto-psi') . '</th><th>' . __('Plano de Saúde', 'pronto-psi') . '</th><th>' . __('Ações', 'pronto-psi') . '</th></tr>';
+echo '<tr>';
+echo '<th>' . __('Nome', 'pronto-psi') . '</th>';
+echo '<th>' . __('Responsável', 'pronto-psi') . '</th>';
+echo '<th>' . __('Plano de Saúde', 'pronto-psi') . '</th>';
+echo '<th>' . __('Cadastro', 'pronto-psi') . '</th>';
+echo '<th>' . __('Prontuários', 'pronto-psi') . '</th>';
+echo '</tr>';
 echo '</thead>';
 echo '<tbody id="clientesTable">';
 
@@ -107,7 +120,8 @@ foreach ($clientes as $cliente) {
     echo '<td>' . esc_html($cliente->full_name) . '</td>';
     echo '<td>' . esc_html($cliente->responsavel_financeiro) . '</td>';
     echo '<td>' . esc_html($cliente->plano_saude) . '</td>';
-    echo '<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewClienteModal" data-id="' . esc_attr($cliente->id) . '" data-nome="' . esc_attr($cliente->full_name) . '">' . __('Ver Dados Clínicos', 'pronto-psi') . '</button></td>';
+    echo '<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewClienteModal" data-id="' . esc_attr($cliente->id) . '" data-nome="' . esc_attr($cliente->full_name) . '"><i class="fas fa-file-medical"></i> ' . __('Dados Clínicos', 'pronto-psi') . '</button></td>';
+    echo '<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewClienteConsultas" data-id="' . esc_attr($cliente->id) . '" data-nome="' . esc_attr($cliente->full_name) . '"><i class="fas fa-notes-medical"></i> ' . __('Registros de Consultas', 'pronto-psi') . '</button></td>';
     echo '</tr>';
 }
 
@@ -133,3 +147,4 @@ $(document).ready(function() {
     });
 });
 </script>
+
