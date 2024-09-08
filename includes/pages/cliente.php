@@ -111,6 +111,7 @@ echo '<th>' . __('Responsável', 'pronto-psi') . '</th>';
 echo '<th>' . __('Plano de Saúde', 'pronto-psi') . '</th>';
 echo '<th>' . __('Cadastro', 'pronto-psi') . '</th>';
 echo '<th>' . __('Prontuários', 'pronto-psi') . '</th>';
+echo '<th>' . __('Ativo?', 'pronto-psi') . '</th>';
 echo '</tr>';
 echo '</thead>';
 echo '<tbody id="clientesTable">';
@@ -121,8 +122,15 @@ foreach ($clientes as $cliente) {
     echo '<td>' . esc_html($cliente->responsavel_financeiro) . '</td>';
     echo '<td>' . esc_html($cliente->plano_saude) . '</td>';
     echo '<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewClienteModal" data-id="' . esc_attr($cliente->id) . '" data-nome="' . esc_attr($cliente->full_name) . '"><i class="fas fa-file-medical"></i> ' . __('Dados Clínicos', 'pronto-psi') . '</button></td>';
-    echo '<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewClienteConsultas" data-id="' . esc_attr($cliente->id) . '" data-nome="' . esc_attr($cliente->full_name) . '"><i class="fas fa-notes-medical"></i> ' . __('Registros de Consultas', 'pronto-psi') . '</button></td>';
+    //  botão de Registros de Consultas por um link que redireciona para atendimento.php com o ID do cliente
+    echo '<td><a href="admin.php?page=atendimento&cliente_id=' . esc_attr($cliente->id) . '" class="btn btn-info btn-sm"><i class="fas fa-notes-medical"></i> ' . __('Registros de Consultas', 'pronto-psi') . '</a></td>';
+    // Exibe o checkbox de ativo/inativo na tabela de clientes
+    echo '<td>
+    <input type="checkbox" class="toggle-status" data-id="' . esc_attr($cliente->id) . '" ' . checked($cliente->status, 'ativo', false) . '>
+    ' . __('Ativo', 'pronto-psi') . '
+    </td>';
     echo '</tr>';
+
 }
 
 echo '</tbody>';
@@ -147,4 +155,3 @@ $(document).ready(function() {
     });
 });
 </script>
-

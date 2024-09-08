@@ -17,8 +17,14 @@ pronto-psi/
 │       ├── prontuario.php
 │       ├── atendimento.php
 │       ├── anotações.php
-│       └── encaminhamentos.php
-│         └── modal/
-│            ├── dados-clinicos.php
-│            ├── functions_modal_dados_clinicos.php
+│       ├── encaminhamentos.php
+│       ├── financeiro.php
+│       ├── modal/
+│       │   ├── dados-clinicos.php
+│       │   └── functions_modal_dados_clinicos.php
+│       └── widgets/
+│           ├── functions_widgets.php
+│           ├── scripts_widgets.js
+│           ├── Select_Paciente.php
+│           └── exibe_paciente.php
 └── pronto-psi.php
