@@ -1,0 +1,74 @@
+/* Estilo personalizado para o título
+
+// widgets/custom-styles.css
+*/
+
+.title-highlight {
+  background-color: #007bff; /* Azul padrão */
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 24px; /* Tamanho da fonte do título */
+  text-align: center; /* Centralizar o texto */
+}
+
+/* Estilo para as abas */
+.nav-tabs .nav-link {
+  color: #007bff; /* Cor padrão das abas */
+  border: 1px solid transparent; /* Borda transparente para evitar deslocamento */
+  border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
+  margin-right: 1px; /* Espaçamento entre as abas */
+}
+
+/* Aba ativa */
+.nav-tabs .nav-link.active {
+  background-color: #28a745; /* Verde para aba ativa */
+  color: white;
+  border: 1px solid #28a745; /* Borda da aba ativa */
+  border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
+}
+
+/* Cor de fundo da aba ativa */
+.tab-content > .active {
+  border: 1px solid #ddd;
+  padding: 20px;
+  background-color: #f8f9fa; /* Cor de fundo leve para o conteúdo */
+}
+
+/* Estilo das tabelas */
+.table {
+  margin-top: 20px;
+  border-radius: 5px; /* Bordas arredondadas para a tabela */
+  overflow: hidden; /* Para bordas arredondadas ficarem visíveis */
+}
+
+.table thead {
+  background-color: #007bff; /* Cor de fundo para o cabeçalho da tabela */
+  color: white; /* Cor do texto no cabeçalho da tabela */
+}
+
+.table th, .table td {
+  vertical-align: middle; /* Alinhar o texto verticalmente ao meio */
+}
+
+/* Estilo das seções */
+.section-title {
+  background-color: #28a745; /* Verde para os títulos das seções */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px; /* Espaçamento abaixo do título da seção */
+}
+
+/* Ajustes específicos para container-fluid.mt-5 */
+.container-fluid.mt-5 {
+  padding: 0; /* Remove o padding */
+  margin-top: 0; /* Remove a margem superior */
+}
+
+/* Estilo para centralizar o conteúdo da coluna */
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
