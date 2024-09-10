@@ -72,3 +72,13 @@
   justify-content: center;
   align-items: center;
 }
+.custom-btn {
+  padding: 10px 20px; /* Define o espaçamento interno do botão */
+  font-size: 16px; /* Define o tamanho da fonte */
+  border-radius: 5px; /* Define bordas arredondadas */
+  min-width: 120px; /* Define uma largura mínima para o botão */
+  height: 40px; /* Define uma altura fixa */
+  display: flex; /* Alinha o conteúdo dentro do botão */
+  justify-content: center;
+  align-items: center;
+}

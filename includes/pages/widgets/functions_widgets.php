@@ -48,4 +48,43 @@ function fetch_paciente_info() {
 // Hook para tratar a requisição AJAX
 add_action('wp_ajax_fetch_paciente_info', 'fetch_paciente_info');
 add_action('wp_ajax_nopriv_fetch_paciente_info', 'fetch_paciente_info');
+
+
+function salvar_novo_atendimento() {
+    global $wpdb;
+
+    $prontuario_id = intval($_POST['prontuario_id']);
+    $data_atendimento = sanitize_text_field($_POST['data_atendimento']);
+    $horario_inicio = sanitize_text_field($_POST['horario_inicio']);
+    $horario_termino = sanitize_text_field($_POST['horario_termino']);
+    $tipo_atendimento = sanitize_text_field($_POST['tipo_atendimento']);
+    $resumo_atendimento = sanitize_textarea_field($_POST['resumo_atendimento']);
+    $observacoes = sanitize_textarea_field($_POST['observacoes']);
+    $pontos_pos_e_melhorias = sanitize_textarea_field($_POST['pontos_pos_e_melhorias']);
+    $reacoes_respostas = sanitize_textarea_field($_POST['reacoes_respostas']);
+
+    // Inserindo os dados na tabela
+    $wpdb->insert(
+        "{$wpdb->prefix}pronto_psi_atendimentos",
+        array(
+            'prontuario_id' => $prontuario_id,
+            'data_atendimento' => $data_atendimento,
+            'horario_inicio' => $horario_inicio,
+            'horario_termino' => $horario_termino,
+            'tipo_atendimento' => $tipo_atendimento,
+            'resumo_atendimento' => $resumo_atendimento,
+            'observacoes' => $observacoes,
+            'pontos_pos_e_melhorias' => $pontos_pos_e_melhorias,
+            'reacoes_respostas' => $reacoes_respostas,
+        )
+    );
+
+    if ($wpdb->insert_id) {
+        wp_send_json_success();
+    } else {
+        wp_send_json_error();
+    }
+}
+add_action('wp_ajax_salvar_novo_atendimento', 'salvar_novo_atendimento');
+
 ?>

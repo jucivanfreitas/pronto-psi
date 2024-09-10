@@ -22,6 +22,8 @@ pronto-psi/
 │       ├── modal/
 │       │   ├── dados-clinicos.php
 │       │   └── functions_modal_dados_clinicos.php
+│       │   ├── atendimento-clinico.php
+│       │   └── functions_modal_atendimento_clinicos.php
 │       └── widgets/
 │           ├── functions_widgets.php
 │           ├── scripts_widgets.js

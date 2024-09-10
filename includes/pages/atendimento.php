@@ -74,7 +74,6 @@ $atendimentos = get_atendimentos();
             </div>
         </div>
 
-
         <!-- Informações do Paciente -->
         <div class="col-md-8 mb-4">
             <h3 class="section-title text-center"><?php _e('Informações do Paciente', 'pronto-psi'); ?></h3>
@@ -123,6 +122,121 @@ $atendimentos = get_atendimentos();
         </div>
     </div>
 <hr>
+
+<!-- Modal de Adicionar Atendimento -->
+<div class="modal fade" id="modalAtendimento" tabindex="-1" role="dialog" aria-labelledby="modalAtendimentoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAtendimentoLabel"><?php _e('Adicionar Atendimento', 'pronto-psi'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><?php _e('Paciente Selecionado:', 'pronto-psi'); ?> <span id="modal-paciente-nome"></span></p>
+                <p><?php _e('ID do Paciente:', 'pronto-psi'); ?> <span id="modal-paciente-id"></span></p>
+                <!-- Aqui você pode adicionar mais campos para capturar dados do atendimento -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Fechar', 'pronto-psi'); ?></button>
+                <button type="button" class="btn btn-primary"><?php _e('Salvar Atendimento', 'pronto-psi'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de Adicionar Atendimento -->
+<div class="modal fade" id="modalAtendimento2" tabindex="-1" role="dialog" aria-labelledby="modalAtendimentoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAtendimentoLabel"><?php _e('Adicionar Atendimento2', 'pronto-psi'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><?php _e('Paciente Selecionado:', 'pronto-psi'); ?> <span id="modal-paciente-nome"></span></p>
+                <p><?php _e('ID do Paciente:', 'pronto-psi'); ?> <span id="modal-paciente-id"></span></p>
+                <!-- Aqui você pode adicionar mais campos para capturar dados do atendimento -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Fechar', 'pronto-psi'); ?></button>
+                <button type="button" class="btn btn-primary"><?php _e('Salvar Atendimento', 'pronto-psi'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Adicionar Financeiro -->
+<div class="modal fade" id="modalFinanceiro" tabindex="-1" role="dialog" aria-labelledby="modalFinanceiroLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFinanceiroLabel"><?php _e('Adicionar Financeiro', 'pronto-psi'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><?php _e('Paciente Selecionado:', 'pronto-psi'); ?> <span id="modal-financeiro-paciente-nome"></span></p>
+                <p><?php _e('ID do Paciente:', 'pronto-psi'); ?> <span id="modal-financeiro-paciente-id"></span></p>
+                <!-- Campos adicionais para o financeiro -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Fechar', 'pronto-psi'); ?></button>
+                <button type="button" class="btn btn-primary"><?php _e('Salvar Financeiro', 'pronto-psi'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Adicionar Evolução -->
+<div class="modal fade" id="modalEvolucao" tabindex="-1" role="dialog" aria-labelledby="modalEvolucaoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEvolucaoLabel"><?php _e('Adicionar Evolução', 'pronto-psi'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><?php _e('Paciente Selecionado:', 'pronto-psi'); ?> <span id="modal-evol-paciente-nome"></span></p>
+                <p><?php _e('ID do Paciente:', 'pronto-psi'); ?> <span id="modal-evol-paciente-id"></span></p>
+                <!-- Aqui você pode adicionar mais campos relacionados à evolução -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Fechar', 'pronto-psi'); ?></button>
+                <button type="button" class="btn btn-primary"><?php _e('Salvar Evolução', 'pronto-psi'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Adicionar Anamnese -->
+<div class="modal fade" id="modalAnamnese" tabindex="-1" role="dialog" aria-labelledby="modalAnamneseLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAnamneseLabel"><?php _e('Adicionar Anamnese', 'pronto-psi'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><?php _e('Paciente Selecionado:', 'pronto-psi'); ?> <span id="modal-anamn-paciente-nome"></span></p>
+                <p><?php _e('ID do Paciente:', 'pronto-psi'); ?> <span id="modal-anamn-paciente-id"></span></p>
+                <!-- Aqui você pode adicionar mais campos relacionados à anamnese -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php _e('Fechar', 'pronto-psi'); ?></button>
+                <button type="button" class="btn btn-primary"><?php _e('Salvar Anamnese', 'pronto-psi'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="row">
         <!-- Informação Clínica -->
         <div class="col-md-11 mb-12 mx-auto ">
@@ -201,69 +315,120 @@ $atendimentos = get_atendimentos();
         </li>
         <li class="nav-item">
             <a class="nav-link" id="anamnesi-tab" data-toggle="tab" href="#anamnesi" role="tab" aria-controls="anamnesi" aria-selected="false">
-                <?php _e('Anamnesi', 'pronto-psi'); ?>
+                <?php _e('Anamnese', 'pronto-psi'); ?>
             </a>
         </li>
     </ul>
 
+    <!-- Conteúdo das Abas -->
     <div class="tab-content" id="myTabContent">
-        <!-- Aba de Atendimentos -->
+        <!-- Aba Atendimentos -->
         <div class="tab-pane fade show active" id="atendimentos" role="tabpanel" aria-labelledby="atendimentos-tab">
-            <div class="mt-5">
-                <h3 class="section-title"><?php _e('Lista de Atendimentos', 'pronto-psi'); ?></h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th><?php _e('Data', 'pronto-psi'); ?></th>
-                            <th><?php _e('Descrição', 'pronto-psi'); ?></th>
-                            <th><?php _e('Duração', 'pronto-psi'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if ($atendimentos) : ?>
-                            <?php foreach ($atendimentos as $atendimento) : ?>
-                                <tr>
-                                    <td><?php echo esc_html($atendimento->data_atendimento); ?></td>
-                                    <td><?php echo esc_html($atendimento->descricao); ?></td>
-                                    <td><?php echo esc_html($atendimento->duracao); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            <tr>
-                                <td colspan="3"><?php _e('Nenhum atendimento encontrado.', 'pronto-psi'); ?></td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+            <h4 class="tab-title"><?php _e('Atendimentos', 'pronto-psi'); ?></h4>
+            <button class="btn btn-primary" id="btn-adicionar-atendimento"><?php _e('Adicionar Atendimento', 'pronto-psi'); ?></button>
         </div>
 
         <!-- Aba Financeiro -->
         <div class="tab-pane fade" id="financeiro" role="tabpanel" aria-labelledby="financeiro-tab">
-            <h3 class="section-title mt-4"><?php _e('Informações Financeiras', 'pronto-psi'); ?></h3>
-            <!-- Adicione aqui a lógica para exibir informações financeiras -->
+            <h4 class="tab-title"><?php _e('Financeiro', 'pronto-psi'); ?></h4>
+            <button class="btn btn-primary" id="btn-adicionar-financeiro"><?php _e('Adicionar Financeiro', 'pronto-psi'); ?></button>
+
+
         </div>
 
         <!-- Aba Evolução -->
         <div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
-            <h3 class="section-title mt-4"><?php _e('Evolução do Paciente', 'pronto-psi'); ?></h3>
-            <!-- Adicione aqui a lógica para exibir a evolução do paciente -->
+            <h4 class="tab-title"><?php _e('Evolução', 'pronto-psi'); ?></h4>
+            <button class="btn btn-primary" id="btn-adicionar-evolucao"><?php _e('Adicionar Evolução', 'pronto-psi'); ?></button>
         </div>
 
-        <!-- Aba Anamnesi -->
+        <!-- Aba Anamnese -->
         <div class="tab-pane fade" id="anamnesi" role="tabpanel" aria-labelledby="anamnesi-tab">
-            <h3 class="section-title mt-4"><?php _e('Anamnesi', 'pronto-psi'); ?></h3>
-            <!-- Adicione aqui a lógica para exibir a anamnesi -->
+
+            <button class="btn btn-primary" id="btn-adicionar-anamnesi"><?php _e('Adicionar Anamnese', 'pronto-psi'); ?></button>
+
         </div>
     </div>
-
 </div>
 
-<!-- JavaScript personalizado -->
 <script>
 jQuery(document).ready(function($) {
-    $('#select_paciente').change(function() {
+    // Submissão do formulário ao mudar o paciente
+    $('#select_paciente').on('change', function() {
         $('#paciente-form').submit();
+    });
+
+    // Função para adicionar atendimento
+    $('#btn-adicionar-atendimento').click(function() {
+        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
+        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+
+        if (!pacienteId) {
+            alert('Por favor, selecione um paciente primeiro.');
+            return;
+        }
+
+        // Define os valores no modal
+        $('#modal-paciente-id').text(pacienteId);
+        $('#modal-paciente-nome').text(pacienteNome);
+
+        // Exibe o modal
+        $('#modalAtendimento').modal('show');
+    });
+
+
+    // Função para adicionar financeiro
+    $('#btn-adicionar-financeiro').click(function() {
+        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
+        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+
+        if (!pacienteId) {
+            alert('Por favor, selecione um paciente primeiro.');
+            return;
+        }
+
+        // Define os valores no modal
+        $('#modal-financeiro-paciente-id').text(pacienteId);
+        $('#modal-financeiro-paciente-nome').text(pacienteNome);
+
+        // Exibe o modal
+        $('#modalFinanceiro').modal('show');
+    });
+
+    // Função para adicionar evolução
+    $('#btn-adicionar-evolucao').click(function() {
+        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
+        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+
+        if (!pacienteId) {
+            alert('Por favor, selecione um paciente primeiro.');
+            return;
+        }
+
+        // Define os valores no modal
+        $('#modal-evol-paciente-id').text(pacienteId);
+        $('#modal-evol-paciente-nome').text(pacienteNome);
+
+        // Exibe o modal
+        $('#modalEvolucao').modal('show');
+    });
+
+    // Função para adicionar anamnese
+    $('#btn-adicionar-anamnesi').click(function() {
+        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
+        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+
+        if (!pacienteId) {
+            alert('Por favor, selecione um paciente primeiro.');
+            return;
+        }
+
+        // Define os valores no modal
+        $('#modal-anamn-paciente-id').text(pacienteId);
+        $('#modal-anamn-paciente-nome').text(pacienteNome);
+
+        // Exibe o modal
+        $('#modalAnamnese').modal('show');
     });
 });
 </script>
