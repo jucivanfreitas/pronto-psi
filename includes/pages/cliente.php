@@ -15,6 +15,8 @@ $bookly_customers_page_url = esc_url(admin_url('admin.php?page=bookly-customers'
 // Incluir os estilos do Bootstrap e Font Awesome
 echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">';
 echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">';
+echo '<link rel="stylesheet" href="' . plugin_dir_url(__FILE__) . 'widgets/custom-styles.css">';
+
 
 // Incluir o script do Bootstrap e suas dependências
 echo '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>';
@@ -22,23 +24,28 @@ echo '<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/po
 echo '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>';
 
 // Exibir o título da página
-echo '<div class="container mt-5">';
-echo '<h2 class="text-center">' . __('Gerenciamento de Cadastro Clínico Para Pacientes', 'pronto-psi') . '</h2>';
+echo '<div class="container-fluid mt-0">';
+echo '<div class="title-highlight">';
+echo '<h1 class="title-highlight">' . __('Gerenciamento de Cadastro Clínico Para Pacientes', 'pronto-psi') . '</h1>';
+echo '</div>';
 
-// Centralizar o card de formulário de cadastro/atualização de clientes
+// Card de cadastro de cliente
 echo '<div class="d-flex justify-content-center mt-4">';
-echo '<div class="card" style="width: 100%; max-width: 600px;">'; // Define uma largura máxima e centraliza o card
+echo '<div class="card" style="width: 100%; max-width: 600px;">';
 
+// Header do card
 echo '<div class="card-header" id="headingOne">';
 echo '<h5 class="mb-0">';
 echo '<span class="h4 text-primary">' . __('Cadastro de Cliente como Paciente', 'pronto-psi') . '</span>';
 echo '</h5>';
 echo '</div>';
 
+// Corpo do card
 echo '<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">';
 echo '<div class="card-body">';
 echo '<form id="formCliente" method="POST" action="">';
 
+// Seção de seleção de clientes
 echo '<div class="form-group">';
 echo '<label for="full_name">' . __('Clientes Cadastrados', 'pronto-psi') . '</label>';
 echo '<select class="form-control" name="full_name" id="full_name" required>';
@@ -51,7 +58,7 @@ foreach ($clientes_disponiveis as $cliente_disponivel) {
 echo '</select>';
 echo '</div>';
 
-// Botões de ação: Salvar Cliente e Cadastrar Novo Cliente
+// Botões de ação
 echo '<div class="d-flex justify-content-between mt-3">';
 echo '<button type="submit" class="btn btn-primary btn-sm d-flex align-items-center" style="flex: 1; margin-right: 5px;" name="submit">';
 echo '<i class="fas fa-save mr-2"></i>' . __('Adicionar Paciente', 'pronto-psi');
@@ -65,8 +72,7 @@ echo '</form>';
 echo '</div>';
 echo '</div>';
 echo '</div>';
-echo '</div>'; // Fim da centralização do card
-
+echo '</div>'; // Fim do card
 // Verificação se o formulário foi submetido
 if (isset($_POST['submit'])) {
     $full_name_id = sanitize_text_field($_POST['full_name']);
@@ -101,9 +107,10 @@ if (isset($_POST['submit'])) {
     }
 }
 
-// Exibir a tabela com a lista de clientes e função de busca
-echo '<h3 class="mt-5">' . __('Lista de Clientes', 'pronto-psi') . '</h3>';
-echo '<table class="table table-bordered table-striped mt-3">';
+// Seção de listagem de clientes
+echo '<div class="mt-5 col-md-8 mb-12 mx-auto">';
+echo '<h3 class="section-title">' . __('Lista de Clientes', 'pronto-psi') . '</h3>';
+echo '<table class="table table-bordered table-striped">';
 echo '<thead class="thead-dark">';
 echo '<tr>';
 echo '<th>' . __('Nome', 'pronto-psi') . '</th>';
@@ -122,19 +129,14 @@ foreach ($clientes as $cliente) {
     echo '<td>' . esc_html($cliente->responsavel_financeiro) . '</td>';
     echo '<td>' . esc_html($cliente->plano_saude) . '</td>';
     echo '<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewClienteModal" data-id="' . esc_attr($cliente->id) . '" data-nome="' . esc_attr($cliente->full_name) . '"><i class="fas fa-file-medical"></i> ' . __('Dados Clínicos', 'pronto-psi') . '</button></td>';
-    //  botão de Registros de Consultas por um link que redireciona para atendimento.php com o ID do cliente
     echo '<td><a href="admin.php?page=atendimento&cliente_id=' . esc_attr($cliente->id) . '" class="btn btn-info btn-sm"><i class="fas fa-notes-medical"></i> ' . __('Registros de Consultas', 'pronto-psi') . '</a></td>';
-    // Exibe o checkbox de ativo/inativo na tabela de clientes
-    echo '<td>
-    <input type="checkbox" class="toggle-status" data-id="' . esc_attr($cliente->id) . '" ' . checked($cliente->status, 'ativo', false) . '>
-    ' . __('Ativo', 'pronto-psi') . '
-    </td>';
+    echo '<td><input type="checkbox" class="toggle-status" data-id="' . esc_attr($cliente->id) . '" ' . checked($cliente->status, 'ativo', false) . '>' . __('Ativo', 'pronto-psi') . '</td>';
     echo '</tr>';
-
 }
 
 echo '</tbody>';
 echo '</table>';
+echo '</div>';
 echo '</div>';
 
 // Inclua o modal de informações clínicas

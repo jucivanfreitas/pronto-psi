@@ -27,22 +27,35 @@ pronto-psi/
 │   ├── admin-menu.php
 │   ├── functions.php
 │   ├── shortcodes.php
-│   ├── install.php
+│   ├── img/
+│   │   └── image.png
 │   └── pages/
 │       ├── prontuario.php
 │       ├── atendimento.php
+│       ├── cliente.php
 │       ├── anotações.php
 │       ├── encaminhamentos.php
 │       ├── financeiro.php
+│       ├── novo-cliente-modal.php
 │       ├── modal/
+│       │   ├── atendimento-clinico.php
 │       │   ├── dados-clinicos.php
-│       │   └── functions_modal_dados_clinicos.php
+│       │   ├── functions_modal_dados_clinicos.php
+│       │   ├── modal_anamnese.php
+│       │   ├── modal_atendimento.php
+│       │   ├── modal_evolucao.php
+│       │   ├── modal_financeiro.php
 │       └── widgets/
+│           ├── custom-styles.css
+│           ├── exibe_paciente.php
 │           ├── functions_widgets.php
 │           ├── scripts_widgets.js
 │           ├── Select_Paciente.php
-│           └── exibe_paciente.php
-└── pronto-psi.php
+│           ├── functions_modal_atendimento_clinicos.php
+├── pronto-psi.php
+├── estrutura.txt
+├── README.md
+
 ```
 
 ## 🚀 Instalação

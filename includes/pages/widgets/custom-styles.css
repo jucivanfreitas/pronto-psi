@@ -4,92 +4,103 @@
 */
 
 .title-highlight {
-  background-color: #007bff; /* Azul padrão */
-  color: white;
-  padding: 20px;
-  border-radius: 0;
- /*  font-size: 24px; Tamanho da fonte do título */
+  background-color: #007bff; /* Cor de fundo azul */
+  color: white; /* Cor do texto branca */
+  padding: 20px; /* Espaçamento interno */
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 36px; /* Tamanho da fonte */
   text-align: center; /* Centralizar o texto */
-  margin: 0;
+  margin: 0; /* Remover margens */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra do texto */
+  width: 100%; /* Ocupa 100% da largura disponível */
+  box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 /* Estilo para as abas */
 .nav-tabs .nav-link {
-  color: #007bff; /* Cor padrão das abas */
-  border: 1px solid  #007bff75;; /* Borda transparente para evitar deslocamento */
-  border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
-  margin-right: 1px; /* Espaçamento entre as abas */
-  width: 130px;
+color: #007bff; /* Cor padrão das abas */
+border: 1px solid  #007bff75;; /* Borda transparente para evitar deslocamento */
+border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
+margin-right: 1px; /* Espaçamento entre as abas */
+width: 130px;
 }
 
 /* Aba ativa */
 .nav-tabs .nav-link.active {
-  background-color: #007bff; /* Verde para aba ativa */
-  color: white;
-  border: 1px solid #007bff; /* Borda da aba ativa */
-  border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
+background-color: #007bff; /* Verde para aba ativa */
+color: white;
+border: 1px solid #007bff; /* Borda da aba ativa */
+border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
 }
 
 /* Cor de fundo da aba ativa */
 .tab-content > .active {
-  border: 1px solid #e5e5e5;
-  padding: 20px;
-  background-color: #f4f5f7; /* Cor de fundo leve para o conteúdo */
+border: 1px solid #e5e5e5;
+padding: 20px;
+background-color: #f4f5f7; /* Cor de fundo leve para o conteúdo */
 }
 .nav-tabs {
-    border-bottom: 1px solid #007bff;
+  border-bottom: 1px solid #007bff;
 }
 /* Estilo das tabelas */
 .table {
-  margin-top: 20px;
-  border-radius: 5px; /* Bordas arredondadas para a tabela */
-  overflow: hidden; /* Para bordas arredondadas ficarem visíveis */
+margin-top: 20px;
+border-radius: 5px; /* Bordas arredondadas para a tabela */
+overflow: hidden; /* Para bordas arredondadas ficarem visíveis */
 }
 
 .table thead {
-  background-color: #007bff; /* Cor de fundo para o cabeçalho da tabela */
-  color: white; /* Cor do texto no cabeçalho da tabela */
+background-color: #007bff; /* Cor de fundo para o cabeçalho da tabela */
+color: white; /* Cor do texto no cabeçalho da tabela */
 }
 
 .table th, .table td {
-  vertical-align: middle; /* Alinhar o texto verticalmente ao meio */
+vertical-align: middle; /* Alinhar o texto verticalmente ao meio */
 }
 
 /* Estilo das seções */
 .section-title {
-  background-color: #55A7FF; /* Verde para os títulos das seções */
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 20px; /* Espaçamento abaixo do título da seção */
+background-color: #55A7FF; /* Verde para os títulos das seções */
+color: white;
+padding: 10px;
+border-radius: 5px;
+margin-bottom: 20px; /* Espaçamento abaixo do título da seção */
 }
 
 /* Ajustes específicos para container-fluid.mt-5 */
 .container-fluid.mt-5 {
-  padding: 0; /* Remove o padding */
-  margin-top: 0; /* Remove a margem superior */
+padding: 0; /* Remove o padding */
+margin-top: 0; /* Remove a margem superior */
 }
 
 /* Estilo para centralizar o conteúdo da coluna */
 .centered-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+color: #fff;
+background-color: #007bff;
+border-color: #007bff;
 }
 
 .btn {
-  border: 1px solid transparent;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  width: 200px;
-  height: 50px;
+border: 1px solid transparent;
+padding: .375rem .75rem;
+font-size: 1rem;
+line-height: 1.5;
+border-radius: .25rem;
+transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+width: 200px;
+height: 50px;
 }
