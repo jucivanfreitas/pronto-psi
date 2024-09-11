@@ -30,10 +30,10 @@ $atendimentos = get_atendimentos();
 <!-- Incluindo CSS personalizado -->
 <link href="<?php echo plugins_url('widgets/custom-styles.css', __FILE__); ?>" rel="stylesheet">
 
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-0">
     <!-- Título da Página -->
-    <div class="text-center mb-4">
-        <h2 class="title-highlight"><?php _e('Gerenciamento de Atendimentos', 'pronto-psi'); ?></h2>
+    <div class="text-center mb-0">
+        <h1 class="title-highlight"><?php _e('Gerenciamento de Atendimentos', 'pronto-psi'); ?></h1>
     </div>
 <hr>
 <!-- Seção de Seleção de Paciente -->

@@ -6,35 +6,39 @@
 .title-highlight {
   background-color: #007bff; /* Azul padrão */
   color: white;
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 24px; /* Tamanho da fonte do título */
+  padding: 20px;
+  border-radius: 0;
+ /*  font-size: 24px; Tamanho da fonte do título */
   text-align: center; /* Centralizar o texto */
+  margin: 0;
 }
 
 /* Estilo para as abas */
 .nav-tabs .nav-link {
   color: #007bff; /* Cor padrão das abas */
-  border: 1px solid transparent; /* Borda transparente para evitar deslocamento */
+  border: 1px solid  #007bff75;; /* Borda transparente para evitar deslocamento */
   border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
   margin-right: 1px; /* Espaçamento entre as abas */
+  width: 130px;
 }
 
 /* Aba ativa */
 .nav-tabs .nav-link.active {
-  background-color: #28a745; /* Verde para aba ativa */
+  background-color: #007bff; /* Verde para aba ativa */
   color: white;
-  border: 1px solid #28a745; /* Borda da aba ativa */
+  border: 1px solid #007bff; /* Borda da aba ativa */
   border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
 }
 
 /* Cor de fundo da aba ativa */
 .tab-content > .active {
-  border: 1px solid #ddd;
+  border: 1px solid #e5e5e5;
   padding: 20px;
-  background-color: #f8f9fa; /* Cor de fundo leve para o conteúdo */
+  background-color: #f4f5f7; /* Cor de fundo leve para o conteúdo */
 }
-
+.nav-tabs {
+    border-bottom: 1px solid #007bff;
+}
 /* Estilo das tabelas */
 .table {
   margin-top: 20px;
@@ -53,7 +57,7 @@
 
 /* Estilo das seções */
 .section-title {
-  background-color: #28a745; /* Verde para os títulos das seções */
+  background-color: #55A7FF; /* Verde para os títulos das seções */
   color: white;
   padding: 10px;
   border-radius: 5px;
@@ -72,13 +76,20 @@
   justify-content: center;
   align-items: center;
 }
-.custom-btn {
-  padding: 10px 20px; /* Define o espaçamento interno do botão */
-  font-size: 16px; /* Define o tamanho da fonte */
-  border-radius: 5px; /* Define bordas arredondadas */
-  min-width: 120px; /* Define uma largura mínima para o botão */
-  height: 40px; /* Define uma altura fixa */
-  display: flex; /* Alinha o conteúdo dentro do botão */
-  justify-content: center;
-  align-items: center;
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn {
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  width: 200px;
+  height: 50px;
 }
