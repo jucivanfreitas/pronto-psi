@@ -1,6 +1,5 @@
 {
-  "name": "atenciosamente-psi/pronto-psi",
-  "description": "Plugin pronto-psi",
-
+  "name": "atenciosamente/pronto-psi",
+  "description": "Projeto pronto-psi",
   "require": {}
 }
