@@ -1,0 +1,15 @@
+{
+  "_readme": [
+      "Este é um arquivo composer.lock falso criado para fins de deploy."
+  ],
+  "packages": [],
+  "packages-dev": [],
+  "aliases": [],
+  "minimum-stability": "stable",
+  "stability-flags": [],
+  "prefer-stable": false,
+  "prefer-lowest": false,
+  "platform": [],
+  "platform-dev": [],
+  "plugin-api-version": "2.0.0"
+}
