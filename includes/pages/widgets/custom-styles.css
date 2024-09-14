@@ -6,7 +6,7 @@
 .title-highlight {
   background-color: #007bff; /* Cor de fundo azul */
   color: white; /* Cor do texto branca */
-  padding: 20px; /* Espaçamento interno */
+  padding: 10px; /* Espaçamento interno */
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   font-size: 36px; /* Tamanho da fonte */
@@ -18,7 +18,7 @@
 }
 .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
   width: 100%;
-  padding-right: 20px;
+  padding-right: 15px;
   padding-left: 0;
   margin-right: 0;
   margin-left: 0;
@@ -103,4 +103,61 @@ border-radius: .25rem;
 transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 width: 200px;
 height: 50px;
+}
+
+/* Destaque para o nome do paciente */
+.paciente-destaque {
+font-size: 24px;
+font-weight: bold;
+color: #ff306d; /* Cor principal definida anteriormente */
+background-color: #f0f0f0;
+padding: 10px;
+border-radius: 5px;
+text-align: center;
+}
+
+/* Ajustes no modal usando Bootstrap */
+.modal-header {
+background-color: #007bff; /* Cor de fundo azul para o cabeçalho do modal */
+color: white;
+}
+
+.modal-title {
+font-size: 24px;
+font-weight: bold;
+}
+
+.modal-footer .btn-primary {
+background-color: #007bff; /* Cor primária personalizada para o botão salvar */
+border-color: #007bff;
+}
+
+.modal-footer .btn-secondary {
+background-color: #6c757d;
+border-color: #6c757d;
+}
+/* Estilo para o ID do Paciente */
+.paciente-info {
+font-size: 18px;
+margin-bottom: 10px;
+}
+
+.paciente-id {
+font-weight: bold;
+color: #ff306d; /* Cor principal definida para destaque */
+background-color: #f9f9f9; /* Fundo suave */
+padding: 5px 20px;
+border-radius: 5px;
+
+}
+
+/* Estilo para o título Adicionar Atendimento */
+.atendimento-title {
+font-size: 22px;
+font-weight: bold;
+color: #007bff; /* Cor azul para o título */
+margin-top: 15px;
+padding: 10px 0;
+border-bottom: 3px solid #007bff; /* Linha inferior para destaque */
+text-align: center; /* Centralização do título */
 }

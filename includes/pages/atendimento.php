@@ -3,6 +3,10 @@
 
 global $wpdb;
 
+
+
+
+
 // Função para recuperar as informações do paciente
 function get_paciente_info($paciente_id) {
     global $wpdb;
@@ -45,6 +49,35 @@ include 'modal/modal_anamnese.php';
         <h1 class="title-highlight"><?php _e('Gerenciamento de Atendimentos', 'pronto-psi'); ?></h1>
     </div>
 <hr>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('#formAdicionarAtendimento').on('submit', function(e) {
+            e.preventDefault(); // Evita o recarregamento da página
+
+            var formData = $(this).serialize(); // Captura todos os dados do formulário
+
+            $.ajax({
+                url: ajaxurl, // URL do admin-ajax.php
+                type: 'POST',
+                data: {
+                    action: 'salvar_atendimento', // Nome da ação
+                    formData: formData // Dados do formulário serializados
+                },
+                success: function(response) {
+                    if(response.success) {
+                        alert(response.data.message); // Exibe mensagem de sucesso
+                    } else {
+                        alert(response.data.message); // Exibe mensagem de erro
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Erro:', error);
+                }
+            });
+        });
+    });
+</script>
+
 <!-- Seção de Seleção de Paciente -->
 <div class="container-fluid mb-12">
     <div class="row justify-content-center">
@@ -255,22 +288,49 @@ jQuery(document).ready(function($) {
         $('#paciente-form').submit();
     });
 
-    // Função para adicionar atendimento
+    // Função para exibir o modal de adicionar atendimento
     $('#btn-adicionar-atendimento').click(function() {
-        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
-        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+        var pacienteId = $('#select_paciente').val();
+        var pacienteNome = $('#select_paciente option:selected').text();
 
         if (!pacienteId) {
             alert('Por favor, selecione um paciente primeiro.');
             return;
         }
 
-        // Define os valores no modal
+        // Preencher os dados no modal
         $('#modal-paciente-id').text(pacienteId);
         $('#modal-paciente-nome').text(pacienteNome);
+        $('#paciente-id-hidden').val(pacienteId);
 
-        // Exibe o modal
+        // Exibir o modal
         $('#modalAtendimento').modal('show');
+    });
+
+    // Submissão do formulário de atendimento via AJAX
+    $('#formAdicionarAtendimento').on('submit', function(e) {
+        e.preventDefault();
+
+        var formData = $(this).serialize(); // Captura os dados do formulário
+
+        $.ajax({
+            url: ajaxurl, // URL do WordPress para AJAX
+            method: 'POST',
+            data: {
+                action: 'salvar_atendimento', // Ação para o backend
+                formData: formData // Dados do formulário
+            },
+            success: function(response) {
+                alert(response.message);
+                if (response.success) {
+                    $('#modalAtendimento').modal('hide');
+                    location.reload(); // Recarrega a página para atualizar a lista de atendimentos
+                }
+            },
+            error: function() {
+                alert('Erro ao salvar o atendimento. Tente novamente.');
+            }
+        });
     });
 
 
@@ -327,5 +387,59 @@ jQuery(document).ready(function($) {
         // Exibe o modal
         $('#modalAnamnese').modal('show');
     });
+
+
+
+    // Função para exibir o modal de adicionar atendimento
+    $('#btn-adicionar-atendimento').click(function() {
+        var pacienteId = $('#select_paciente').val();
+        var pacienteNome = $('#select_paciente option:selected').text();
+
+        if (!pacienteId) {
+            alert('Por favor, selecione um paciente primeiro.');
+            return;
+        }
+
+        // Preencher os dados no modal
+        $('#modal-paciente-id').text(pacienteId);
+        $('#modal-paciente-nome').text(pacienteNome);
+        $('#paciente-id-hidden').val(pacienteId);
+
+        // Exibir o modal
+        $('#modalAtendimento').modal('show');
+    });
+
+    // Submissão do formulário de atendimento via AJAX
+    $('#formAdicionarAtendimento').on('submit', function(e) {
+        e.preventDefault();
+
+        var formData = $(this).serialize(); // Captura os dados do formulário
+
+        $.ajax({
+            url: ajaxurl, // URL do WordPress para AJAX
+            method: 'POST',
+            data: {
+                action: 'salvar_atendimento', // Ação para o backend
+                formData: formData // Dados do formulário
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert('Atendimento salvo com sucesso!');
+                    $('#modalAtendimento').modal('hide');
+                    location.reload(); // Recarrega a página para atualizar a lista de atendimentos
+                } else {
+                    alert('Erro ao salvar o atendimento: ' + response.data.message);
+                }
+            },
+            error: function() {
+                alert('Erro ao salvar o atendimento. Tente novamente.');
+            }
+        });
+    });
 });
+
+
+
+
+
 </script>

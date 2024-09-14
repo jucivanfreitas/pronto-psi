@@ -66,15 +66,19 @@ function pronto_psi_update_tables() {
             ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB $charset_collate;";
 
-    // Executa o SQL para criar ou atualizar as tabelas no banco de dados
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
-}
+add_action('after_setup_theme', 'pronto_psi_update_tables');
 
+/**
+ * Enfileira o jQuery e define o ajaxurl no JavaScript
+ */
 function pronto_psi_enqueue_scripts() {
     wp_enqueue_script('jquery');
+    ?>
+    <script type="text/javascript">
+        var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+    </script>
+    <?php
 }
 add_action('wp_enqueue_scripts', 'pronto_psi_enqueue_scripts');
-
 
 ?>

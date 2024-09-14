@@ -4,7 +4,7 @@
  * Plugin Name: Prontuários Psicologia
  * Plugin URI:  https://www.datavisio.store
  * Description: Prontuário para profissionais de saúde em psicologia. Organize e gerencie prontuários clínicos com facilidade, aproveitando as funcionalidades avançadas do WordPress.
- * Version:     1.0.29
+ * Version:     1.0.30
  * Author:      Jucivan Freitas
  * Author URI:  https://www.datavisio.store
  * Text Domain: pronto-psi
@@ -37,6 +37,7 @@
  * =1.0.23=
  * aDCIONANDO PAGINA DE ATENDIMENTO PARA receber auto seleção oriundo da pagina de clientes
  * adicionando conteudo na pagina atendimento
+ * 1.0.30 modal atendimento estruturado e funcional
  *
  * 1.0.29 modilarizando modais
  *

@@ -5,9 +5,17 @@ function pronto_psi_add_admin_menu()
 {
     // Adiciona uma separação personalizada para os "Plug-ins Pessoais"
     global $menu;
-    $position = 110; // Posição para a separação personalizada (ajuste conforme necessário)
+    $position = 80; // Posição para a separação personalizada (ajuste conforme necessário)
 
-    $menu[$position] = array('', 'read', 'separator-plugin-pessoais', '', 'wp-menu-separator'); // Adiciona a separação "Plug-ins Pessoais"
+   // $menu[$position] = array('', 'read', 'separator-plugin-pessoais', 'Atenciosamente', 'wp-menu-separator'); // Adiciona a separação "Plug-ins Pessoais"
+    $menu[$position] = array(
+    'Nome do Separador', // Título do separador
+    'read', // Capability necessária
+    'Atenciosamente Psi', // Slug único
+    '', // Função
+    'wp-menu-separator', // Classe CSS para separador
+    'menu-top' // Classe adicional para manter estilo de separador
+);
 
     // Adiciona o menu principal do plugin abaixo da separação
     add_menu_page(
@@ -17,7 +25,7 @@ function pronto_psi_add_admin_menu()
         'pronto-psi',
         'pronto_psi_main_page',
         'dashicons-clipboard',
-        $position + 1 // Posiciona logo abaixo da separação personalizada
+        $position -1 // Posiciona logo abaixo da separação personalizada
     );
 
     // Adiciona submenu para Clientes
