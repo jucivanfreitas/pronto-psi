@@ -19,6 +19,7 @@ pronto-psi/
 │       ├── cliente.php
 │       ├── anotações.php
 │       ├── encaminhamentos.php
+
 │       ├── financeiro.php
 │       ├── novo-cliente-modal.php
 │       ├── modal/
