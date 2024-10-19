@@ -10,7 +10,7 @@ function pronto_psi_update_tables() {
 
     // Tabela para informações dos clientes
     $table_name = $wpdb->prefix . 'pronto_psi_clientes';
-    $sql1 = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE $table_name (
         id INT(11) NOT NULL AUTO_INCREMENT,
         bookly_user_id BIGINT(20) UNSIGNED NOT NULL,  /* ID do cliente da tabela wp_bookly_customers */
         full_name VARCHAR(128) NOT NULL,
@@ -33,7 +33,7 @@ function pronto_psi_update_tables() {
 
     // Tabela para dados de atendimentos
     $table_name = $wpdb->prefix . 'pronto_psi_atendimentos';
-    $sql2 = "CREATE TABLE $table_name (
+    $sql .= "CREATE TABLE $table_name (
         id INT(11) NOT NULL AUTO_INCREMENT,
         prontuario_id INT(11) NOT NULL,
         data_atendimento DATE NOT NULL,
@@ -52,7 +52,7 @@ function pronto_psi_update_tables() {
 
     // Tabela para encaminhamentos
     $table_name = $wpdb->prefix . 'pronto_psi_encaminhamentos';
-    $sql3 = "CREATE TABLE $table_name (
+    $sql .= "CREATE TABLE $table_name (
         id INT(11) NOT NULL AUTO_INCREMENT,
         atendimento_id INT(11) NOT NULL,
         tipo_encaminhamento VARCHAR(128) NOT NULL,
@@ -66,13 +66,10 @@ function pronto_psi_update_tables() {
             ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB $charset_collate;";
 
-    // Executa as queries para criar ou atualizar as tabelas
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql1);
-    dbDelta($sql2);
-    dbDelta($sql3);
+    dbDelta($sql);
 }
-add_action('after_switch_theme', 'pronto_psi_update_tables'); // ou 'plugins_loaded' para plugins
+add_action('plugins_loaded', 'pronto_psi_update_tables');
 
 /**
  * Enfileira o jQuery e define o ajaxurl no JavaScript

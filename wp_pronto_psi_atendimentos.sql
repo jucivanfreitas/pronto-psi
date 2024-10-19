@@ -24,54 +24,54 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `wp_pronto_psi_atendimentos`
---
+  -- Estrutura da tabela `wp_pronto_psi_atendimentos`
+  --
 
-CREATE TABLE `wp_pronto_psi_atendimentos` (
-  `id` int(11) NOT NULL,
-  `prontuario_id` int(11) NOT NULL,
-  `data_atendimento` date NOT NULL,
-  `horario_inicio` time NOT NULL,
-  `horario_termino` time NOT NULL,
-  `tipo_atendimento` varchar(20) NOT NULL,
-  `duracao_atendimento` time NOT NULL,
-  `resumo_atendimento` text DEFAULT NULL,
-  `observacoes` text DEFAULT NULL,
-  `pontos_pos_e_melhorias` text DEFAULT NULL,
-  `reacoes_respostas` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+  CREATE TABLE `wp_pronto_psi_atendimentos` (
+    `id` int(11) NOT NULL,
+    `prontuario_id` int(11) NOT NULL,
+    `data_atendimento` date NOT NULL,
+    `horario_inicio` time NOT NULL,
+    `horario_termino` time NOT NULL,
+    `tipo_atendimento` varchar(20) NOT NULL,
+    `duracao_atendimento` time NOT NULL,
+    `resumo_atendimento` text DEFAULT NULL,
+    `observacoes` text DEFAULT NULL,
+    `pontos_pos_e_melhorias` text DEFAULT NULL,
+    `reacoes_respostas` text DEFAULT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Índices para tabelas despejadas
---
+  --
+  -- Índices para tabelas despejadas
+  --
 
---
--- Índices para tabela `wp_pronto_psi_atendimentos`
---
-ALTER TABLE `wp_pronto_psi_atendimentos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `prontuario_id` (`prontuario_id`);
+  --
+  -- Índices para tabela `wp_pronto_psi_atendimentos`
+  --
+  ALTER TABLE `wp_pronto_psi_atendimentos`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `prontuario_id` (`prontuario_id`);
 
---
--- AUTO_INCREMENT de tabelas despejadas
---
+  --
+  -- AUTO_INCREMENT de tabelas despejadas
+  --
 
---
--- AUTO_INCREMENT de tabela `wp_pronto_psi_atendimentos`
---
-ALTER TABLE `wp_pronto_psi_atendimentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  --
+  -- AUTO_INCREMENT de tabela `wp_pronto_psi_atendimentos`
+  --
+  ALTER TABLE `wp_pronto_psi_atendimentos`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- Restrições para despejos de tabelas
---
+  --
+  -- Restrições para despejos de tabelas
+  --
 
---
--- Limitadores para a tabela `wp_pronto_psi_atendimentos`
---
-ALTER TABLE `wp_pronto_psi_atendimentos`
-  ADD CONSTRAINT `wp_pronto_psi_atendimentos_ibfk_1` FOREIGN KEY (`prontuario_id`) REFERENCES `wp_pronto_psi_clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+  --
+  -- Limitadores para a tabela `wp_pronto_psi_atendimentos`
+  --
+  ALTER TABLE `wp_pronto_psi_atendimentos`
+    ADD CONSTRAINT `wp_pronto_psi_atendimentos_ibfk_1` FOREIGN KEY (`prontuario_id`) REFERENCES `wp_pronto_psi_clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

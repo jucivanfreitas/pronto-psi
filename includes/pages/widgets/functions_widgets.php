@@ -1,5 +1,5 @@
 <?php
-// includes/functions_widgets.php
+// includes\pages\widgets\functions_widgets.php
 
 // Função para buscar e retornar as informações do paciente via AJAX
 function fetch_paciente_info() {

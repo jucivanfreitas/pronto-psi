@@ -1,4 +1,8 @@
-<!-- Botão para abrir o modal -->
+<!-- Botão para abrir o modal
+includes\pages\modal\atendimento-clinico.php
+-->
+
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novoAtendimentoModal">
     <?php _e('Novo Atendimento', 'pronto-psi'); ?>
 </button>

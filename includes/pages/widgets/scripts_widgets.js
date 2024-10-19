@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
                   alert('Atendimento salvo com sucesso.');
                   location.reload(); // Atualiza a página após salvar
               } else {
-                  alert('Erro ao salvar o atendimento.');
+                  alert('Erro ao salvar o atendimento includes/pages/widgets/scripts_widgets.js.');
               }
           }
       });
