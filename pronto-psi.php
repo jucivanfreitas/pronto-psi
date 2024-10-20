@@ -96,7 +96,7 @@ if (!class_exists('ProntoPsi')) {
          */
         private function define_constants()
         {
-            define('PRONTO_PSI_VERSION', '1.0.12');
+            define('PRONTO_PSI_VERSION', '1.0.13');
             define('PRONTO_PSI_PLUGIN_DIR', plugin_dir_path(__FILE__));
             define('PRONTO_PSI_PLUGIN_URL', plugin_dir_url(__FILE__));
         }
