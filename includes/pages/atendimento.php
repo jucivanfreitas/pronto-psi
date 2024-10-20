@@ -229,6 +229,11 @@ include 'modal/modal_anamnese.php';
     <!-- Abas Horizontais -->
     <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
         <li class="nav-item">
+            <a class="nav-link" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
+                <?php _e('Evolução', 'pronto-psi'); ?>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="true">
                 <?php _e('Atendimentos', 'pronto-psi'); ?>
             </a>
@@ -238,11 +243,7 @@ include 'modal/modal_anamnese.php';
                 <?php _e('Financeiro', 'pronto-psi'); ?>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
-                <?php _e('Evolução', 'pronto-psi'); ?>
-            </a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link" id="anamnesi-tab" data-toggle="tab" href="#anamnesi" role="tab" aria-controls="anamnesi" aria-selected="false">
                 <?php _e('Anamnese', 'pronto-psi'); ?>
@@ -368,6 +369,25 @@ jQuery(document).ready(function($) {
 
         // Exibe o modal
         $('#modalEvolucao').modal('show');
+    });
+    $('#formAdicionarEvolucao').on('submit', function(e) {
+        e.preventDefault();
+
+        var formData = $(this).serialize(); // Serializa os dados do formulário
+
+        $.ajax({
+            type: 'POST',
+            url: pronto_psi_ajax_object.ajax_url, // AJAX URL fornecido pelo WordPress
+            data: formData + '&action=salvar_evolucao', // Inclui a ação do AJAX
+            success: function(response) {
+                if (response.success) {
+                    alert('Evolução salva com sucesso!');
+                    $('#modalEvolucao').modal('hide');
+                } else {
+                    alert('Erro ao salvar a evolução.');
+                }
+            }
+        });
     });
 
     // Função para adicionar anamnese
