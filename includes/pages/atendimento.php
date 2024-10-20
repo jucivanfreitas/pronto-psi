@@ -229,12 +229,12 @@ include 'modal/modal_anamnese.php';
     <!-- Abas Horizontais -->
     <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
+            <a class="nav-link active" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
                 <?php _e('Evolução', 'pronto-psi'); ?>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="true">
+            <a class="nav-link " id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="true">
                 <?php _e('Atendimentos', 'pronto-psi'); ?>
             </a>
         </li>
@@ -424,4 +424,3 @@ jQuery(document).ready(function($) {
     });
 });
 </script>
-
