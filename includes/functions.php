@@ -83,4 +83,101 @@ function pronto_psi_enqueue_scripts() {
     <?php
 }
 add_action('wp_enqueue_scripts', 'pronto_psi_enqueue_scripts');
+
+add_action('wp_ajax_salvar_evolucao', 'salvar_evolucao');
+add_action('wp_ajax_nopriv_salvar_evolucao', 'salvar_evolucao'); // Caso precise que usuários não logados também possam acessar
+
+function salvar_evolucao() {
+    global $wpdb;
+
+    // Verifique se os campos obrigatórios estão presentes
+    if (!isset($_POST['dados_evolucao']) || !isset($_POST['prontuario_id'])) {
+        wp_send_json_error('Dados obrigatórios de evolução não foram fornecidos.');
+        return;
+    }
+
+    // Sanitização dos campos do formulário
+    $dados_evolucao = sanitize_text_field($_POST['dados_evolucao']);
+    $prontuario_id = sanitize_text_field($_POST['prontuario_id']);
+    $data_atendimento = sanitize_text_field($_POST['data_atendimento']);
+    $horario_inicio = sanitize_text_field($_POST['horario_inicio']);
+    $horario_termino = sanitize_text_field($_POST['horario_termino']);
+    $tipo_atendimento = sanitize_text_field($_POST['tipo_atendimento']);
+    $observacoes = sanitize_text_field($_POST['observacoes']);
+    $pontos_pos_e_melhorias = sanitize_text_field($_POST['pontos_pos_e_melhorias']);
+    $reacoes_respostas = sanitize_text_field($_POST['reacoes_respostas']);
+    $resumo_atendimento = sanitize_text_field($_POST['resumo_atendimento']); // Adicionar a coleta deste campo
+
+    // Calcula a duração do atendimento
+    $inicio = DateTime::createFromFormat('H:i', $horario_inicio);
+    $termino = DateTime::createFromFormat('H:i', $horario_termino);
+    if ($inicio && $termino) {
+        $duracao_atendimento = $inicio->diff($termino)->format('%H:%I');
+    } else {
+        wp_send_json_error('Horário de início ou término inválido.');
+        return;
+    }
+
+    // Validação adicional (se necessário)
+    // Validação adicional (exibir qual campo está faltando)
+if (empty($dados_evolucao)) {
+    wp_send_json_error('O campo "Evolução" é obrigatório.');
+    return;
+}
+
+if (empty($prontuario_id)) {
+    wp_send_json_error('O campo "Prontuário ID" é obrigatório.');
+    return;
+}
+
+if (empty($data_atendimento)) {
+    wp_send_json_error('O campo "Data do Atendimento" é obrigatório.');
+    return;
+}
+
+if (empty($horario_inicio)) {
+    wp_send_json_error('O campo "Horário de Início" é obrigatório.');
+    return;
+}
+
+if (empty($horario_termino)) {
+    wp_send_json_error('O campo "Horário de Término" é obrigatório.');
+    return;
+}
+
+if (empty($tipo_atendimento)) {
+    wp_send_json_error('O campo "Tipo de Atendimento" é obrigatório.');
+    return;
+}
+
+
+    // Inserção no banco de dados
+    $result = $wpdb->insert(
+        $wpdb->prefix . 'pronto_psi_atendimentos',
+        array(
+            'prontuario_id' => $prontuario_id,
+            'data_atendimento' => $data_atendimento,
+            'horario_inicio' => $horario_inicio,
+            'horario_termino' => $horario_termino,
+            'tipo_atendimento' => $tipo_atendimento,
+            'duracao_atendimento' => $duracao_atendimento,
+            'resumo_atendimento' => $resumo_atendimento, // Garantindo que o campo está sendo utilizado
+            'observacoes' => $observacoes,
+            'pontos_pos_e_melhorias' => $pontos_pos_e_melhorias,
+            'reacoes_respostas' => $reacoes_respostas
+        )
+    );
+
+    if ($result) {
+        wp_send_json_success('Evolução salva com sucesso.');
+    } else {
+        error_log('Erro ao salvar evolução: ' . $wpdb->last_error); // Registrar o erro no log para depuração
+        wp_send_json_error('Erro ao salvar a evolução.');
+    }
+
+    wp_die(); // Finaliza a execução do script
+}
+
+
+
 ?>

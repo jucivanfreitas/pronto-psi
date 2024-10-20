@@ -322,10 +322,12 @@ jQuery(document).ready(function($) {
                 formData: formData // Dados do formulário
             },
             success: function(response) {
-                alert(response.message);
                 if (response.success) {
+                    alert('Atendimento salvo com sucesso!');
                     $('#modalAtendimento').modal('hide');
                     location.reload(); // Recarrega a página para atualizar a lista de atendimentos
+                } else {
+                    alert('Erro ao salvar o atendimento: ' + response.data.message);
                 }
             },
             error: function() {
@@ -334,11 +336,10 @@ jQuery(document).ready(function($) {
         });
     });
 
-
     // Função para adicionar financeiro
     $('#btn-adicionar-financeiro').click(function() {
-        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
-        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+        var pacienteId = $('#select_paciente').val();
+        var pacienteNome = $('#select_paciente option:selected').text();
 
         if (!pacienteId) {
             alert('Por favor, selecione um paciente primeiro.');
@@ -355,8 +356,8 @@ jQuery(document).ready(function($) {
 
     // Função para adicionar evolução
     $('#btn-adicionar-evolucao').click(function() {
-        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
-        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+        var pacienteId = $('#select_paciente').val();
+        var pacienteNome = $('#select_paciente option:selected').text();
 
         if (!pacienteId) {
             alert('Por favor, selecione um paciente primeiro.');
@@ -366,34 +367,16 @@ jQuery(document).ready(function($) {
         // Define os valores no modal
         $('#modal-evol-paciente-id').text(pacienteId);
         $('#modal-evol-paciente-nome').text(pacienteNome);
+        $('#paciente-evol-id-hidden').val(pacienteId); // Atribuindo o ID do paciente no campo oculto
 
         // Exibe o modal
         $('#modalEvolucao').modal('show');
     });
-    $('#formAdicionarEvolucao').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = $(this).serialize(); // Serializa os dados do formulário
-
-        $.ajax({
-            type: 'POST',
-            url: pronto_psi_ajax_object.ajax_url, // AJAX URL fornecido pelo WordPress
-            data: formData + '&action=salvar_evolucao', // Inclui a ação do AJAX
-            success: function(response) {
-                if (response.success) {
-                    alert('Evolução salva com sucesso!');
-                    $('#modalEvolucao').modal('hide');
-                } else {
-                    alert('Erro ao salvar a evolução.');
-                }
-            }
-        });
-    });
 
     // Função para adicionar anamnese
     $('#btn-adicionar-anamnesi').click(function() {
-        var pacienteId = $('#select_paciente').val(); // Recupera o ID do paciente selecionado
-        var pacienteNome = $('#select_paciente option:selected').text(); // Recupera o nome do paciente selecionado
+        var pacienteId = $('#select_paciente').val();
+        var pacienteNome = $('#select_paciente option:selected').text();
 
         if (!pacienteId) {
             alert('Por favor, selecione um paciente primeiro.');
@@ -408,58 +391,37 @@ jQuery(document).ready(function($) {
         $('#modalAnamnese').modal('show');
     });
 
-
-
-    // Função para exibir o modal de adicionar atendimento
-    $('#btn-adicionar-atendimento').click(function() {
-        var pacienteId = $('#select_paciente').val();
-        var pacienteNome = $('#select_paciente option:selected').text();
-
-        if (!pacienteId) {
-            alert('Por favor, selecione um paciente primeiro.');
-            return;
-        }
-
-        // Preencher os dados no modal
-        $('#modal-paciente-id').text(pacienteId);
-        $('#modal-paciente-nome').text(pacienteNome);
-        $('#paciente-id-hidden').val(pacienteId);
-
-        // Exibir o modal
-        $('#modalAtendimento').modal('show');
-    });
-
-    // Submissão do formulário de atendimento via AJAX
-    $('#formAdicionarAtendimento').on('submit', function(e) {
+    // Submissão do formulário de evolução via AJAX
+    jQuery(document).on('submit', '#formAdicionarEvolucao', function(e) {
         e.preventDefault();
 
-        var formData = $(this).serialize(); // Captura os dados do formulário
+        var dados = {
+            action: 'salvar_evolucao',
+            prontuario_id: jQuery('#paciente-evol-id-hidden').val(), // Prontuário ID adicionado
+            data_atendimento: jQuery('#data_atendimento').val(),
+            horario_inicio: jQuery('#horario_inicio').val(),
+            horario_termino: jQuery('#horario_termino').val(),
+            tipo_atendimento: jQuery('#tipo_atendimento').val(),
+            dados_evolucao: jQuery('#resumo_atendimento').val(),
+            observacoes: jQuery('#observacoes').val(),
+            pontos_pos_e_melhorias: jQuery('#pontos_pos_e_melhorias').val(),
+            reacoes_respostas: jQuery('#reacoes_respostas').val()
+        };
 
-        $.ajax({
-            url: ajaxurl, // URL do WordPress para AJAX
-            method: 'POST',
-            data: {
-                action: 'salvar_atendimento', // Ação para o backend
-                formData: formData // Dados do formulário
-            },
+        jQuery.ajax({
+            url: pronto_psi_ajax_object.ajax_url,
+            type: 'POST',
+            data: dados,
             success: function(response) {
                 if (response.success) {
-                    alert('Atendimento salvo com sucesso!');
-                    $('#modalAtendimento').modal('hide');
-                    location.reload(); // Recarrega a página para atualizar a lista de atendimentos
+                    alert('Evolução salva com sucesso!');
+                    jQuery('#modalEvolucao').modal('hide');
                 } else {
-                    alert('Erro ao salvar o atendimento: ' + response.data.message);
+                    alert(response.data); // Mensagem de erro do servidor
                 }
-            },
-            error: function() {
-                alert('Erro ao salvar o atendimento. Tente novamente.');
             }
         });
     });
 });
-
-
-
-
-
 </script>
+
