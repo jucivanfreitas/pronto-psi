@@ -161,3 +161,16 @@ padding: 10px 0;
 border-bottom: 3px solid #007bff; /* Linha inferior para destaque */
 text-align: center; /* Centralização do título */
 }
+
+
+.card{
+    width: 100%; /* Faz com que o card ocupe a largura total */
+    margin-bottom: 12px; /* Ajusta o espaçamento inferior */
+}
+
+@media (min-width: 768px) {
+    .card {
+        max-width: 100%; /* Em telas maiores, o card ainda ocupará todo o espaço disponível */
+    }
+}
+

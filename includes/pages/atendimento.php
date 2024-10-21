@@ -35,10 +35,14 @@ include 'modal/modal_anamnese.php';
 
 
 <!-- Incluindo Bootstrap CSS e JS -->
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- jQuery (Necessário para o Bootstrap JS) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <!-- Incluindo CSS personalizado -->
 <link href="<?php echo plugins_url('widgets/custom-styles.css', __FILE__); ?>" rel="stylesheet">
@@ -49,6 +53,12 @@ include 'modal/modal_anamnese.php';
         <h1 class="title-highlight"><?php _e('Gerenciamento de Atendimentos', 'pronto-psi'); ?></h1>
     </div>
 <hr>
+
+<!-- Incluindo Bootstrap CSS -->
+
+
+
+
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('#formAdicionarAtendimento').on('submit', function(e) {
@@ -78,13 +88,130 @@ include 'modal/modal_anamnese.php';
     });
 </script>
 
+
+
+
+
+a 
+<hr>
+
+<!-- Incluindo Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Incluindo jQuery e Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+<div class="accordion" id="accordionExample">
+
+  <!-- Card 1 -->
+  <div class="col-md-11 mb-4 mx-auto">
+    <div class=section-title" id="headingOne">
+      <h5 class="section-title text-center d-flex justify-content-between align-items-center"">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Informação Clínica
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-11 mb-4 mx-auto">
+            <div class="widget-container p-4 border rounded shadow-sm bg-light w-100">
+              <?php
+              // Exibe informações clínicas do paciente selecionado
+              if ($paciente_info) {
+                  echo '<div class="patient-info">';
+                  echo '<table class="table table-bordered table-striped">';
+                  echo '<tbody>';
+
+                  echo '<tr>';
+                  echo '<th>' . __('Responsável Financeiro:', 'pronto-psi') . '</th>';
+                  echo '<td>' . esc_html($paciente_info->responsavel_financeiro) . '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                  echo '<th>' . __('Motivo da Consulta:', 'pronto-psi') . '</th>';
+                  echo '<td>' . esc_html($paciente_info->motivo_consulta) . '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                  echo '<th>' . __('Sintomas Relatados:', 'pronto-psi') . '</th>';
+                  echo '<td>' . esc_html($paciente_info->sintomas_rel) . '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                  echo '<th>' . __('Diagnóstico:', 'pronto-psi') . '</th>';
+                  echo '<td>' . esc_html($paciente_info->diagnostico) . '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                  echo '<th>' . __('Tratamento Anterior:', 'pronto-psi') . '</th>';
+                  echo '<td>' . esc_html($paciente_info->tratamento_anterior) . '</td>';
+                  echo '</tr>';
+
+                  echo '<tr>';
+                  echo '<th>' . __('Medicações em Uso:', 'pronto-psi') . '</th>';
+                  echo '<td>' . esc_html($paciente_info->medicacoes_uso) . '</td>';
+                  echo '</tr>';
+
+                  echo '</tbody>';
+                  echo '</table>';
+                  echo '</div>';
+              } else {
+                  echo '<div class="alert alert-warning" role="alert">';
+                  echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
+                  echo '</div>';
+              }
+              ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- Card 3 -->
+  <div class="card mb-3">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Grupo de itens colapsável #3
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
 <!-- Seção de Seleção de Paciente -->
 <div class="container-fluid mb-12">
+    
+    
+    
+    
+    
+    
+    
     <div class="row justify-content-center">
         <!-- Formulário de Seleção de Paciente -->
         <div class="col-md-3 mb-6 d-flex align-items-center">
 
             <div class="widget-container p-3 border rounded shadow-sm w-100">
+                
+                
+                
 
                 <form id="paciente-form" method="POST" action="">
                     <?php
@@ -167,61 +294,62 @@ include 'modal/modal_anamnese.php';
 
 
 
-    <div class="row">
-        <!-- Informação Clínica -->
-        <div class="col-md-11 mb-12 mx-auto ">
-            <h3 class="section-title text-center"><?php _e('Informação Clínica', 'pronto-psi'); ?></h3>
-            <div class="widget-container p-4 border rounded shadow-sm bg-light w-100">
-                <?php
-                // Exibe informações clínicas do paciente selecionado
-                if ($paciente_info) {
-                    echo '<div class="patient-info">';
-                    echo '<table class="table table-bordered table-striped">';
-                    echo '<tbody>';
 
+<!-- jQuery (Necessário para o Bootstrap JS) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<div class="row">
+    <!-- Informação Clínica -->
+    <div class="col-md-11 mb-4 mx-auto">
+        <h3 class="section-title text-center d-flex justify-content-between align-items-center">
+            <span><?php _e('Informação Clínica', 'pronto-psi'); ?></span>
+            <a class="btn btn-link" data-bs-toggle="collapse" href="#infoClinica" role="button" aria-expanded="false" aria-controls="infoClinica">
+                <i class="bi bi-chevron-down" id="icon-infoClinica"></i>
+            </a>
+        </h3>
+        <div class="collapse widget-container p-4 border rounded shadow-sm bg-light w-100" id="infoClinica">
+            <?php
+            // Exibe informações clínicas do paciente selecionado
+            if (isset($paciente_info) && !empty($paciente_info)) {
+                echo '<div class="patient-info">';
+                echo '<table class="table table-bordered table-striped">';
+                echo '<tbody>';
+                
+                // Loop para exibir os dados
+                foreach ([
+                    __('Responsável Financeiro:', 'pronto-psi') => $paciente_info->responsavel_financeiro,
+                    __('Motivo da Consulta:', 'pronto-psi') => $paciente_info->motivo_consulta,
+                    __('Sintomas Relatados:', 'pronto-psi') => $paciente_info->sintomas_rel,
+                    __('Diagnóstico:', 'pronto-psi') => $paciente_info->diagnostico,
+                    __('Tratamento Anterior:', 'pronto-psi') => $paciente_info->tratamento_anterior,
+                    __('Medicações em Uso:', 'pronto-psi') => $paciente_info->medicacoes_uso,
+                ] as $label => $value) {
                     echo '<tr>';
-                    echo '<th>' . __('Responsável Financeiro:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->responsavel_financeiro) . '</td>';
+                    echo '<th>' . esc_html($label) . '</th>';
+                    echo '<td>' . esc_html($value) . '</td>';
                     echo '</tr>';
-
-                    echo '<tr>';
-                    echo '<th>' . __('Motivo da Consulta:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->motivo_consulta) . '</td>';
-                    echo '</tr>';
-
-                    echo '<tr>';
-                    echo '<th>' . __('Sintomas Relatados:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->sintomas_rel) . '</td>';
-                    echo '</tr>';
-
-                    echo '<tr>';
-                    echo '<th>' . __('Diagnóstico:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->diagnostico) . '</td>';
-                    echo '</tr>';
-
-                    echo '<tr>';
-                    echo '<th>' . __('Tratamento Anterior:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->tratamento_anterior) . '</td>';
-                    echo '</tr>';
-
-                    echo '<tr>';
-                    echo '<th>' . __('Medicações em Uso:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->medicacoes_uso) . '</td>';
-                    echo '</tr>';
-
-                    echo '</tbody>';
-                    echo '</table>';
-                    echo '</div>';
-                } else {
-                    echo '<div class="alert alert-warning" role="alert">';
-                    echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
-                    echo '</div>';
                 }
-                ?>
-            </div>
+                
+                echo '</tbody>';
+                echo '</table>';
+                echo '</div>';
+            } else {
+                echo '<div class="alert alert-warning" role="alert">';
+                echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
+                echo '</div>';
+            }
+            ?>
         </div>
     </div>
 </div>
+
+</div>
+
+
+
+
 
 
 <hr>
@@ -229,12 +357,12 @@ include 'modal/modal_anamnese.php';
     <!-- Abas Horizontais -->
     <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
+            <a class="nav-link" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
                 <?php _e('Evolução', 'pronto-psi'); ?>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="true">
+            <a class="nav-link active" id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="true">
                 <?php _e('Atendimentos', 'pronto-psi'); ?>
             </a>
         </li>
@@ -280,6 +408,7 @@ include 'modal/modal_anamnese.php';
 
         </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -423,4 +552,7 @@ jQuery(document).ready(function($) {
         });
     });
 });
+
+
 </script>
+
