@@ -68,11 +68,11 @@ vertical-align: middle; /* Alinhar o texto verticalmente ao meio */
 
 /* Estilo das seções */
 .section-title {
-background-color: #55A7FF; /* Verde para os títulos das seções */
+background-color: #49698b; /* Verde para os títulos das seções */
 color: white;
-padding: 10px;
+padding: 5px;
 border-radius: 5px;
-margin-bottom: 20px; /* Espaçamento abaixo do título da seção */
+/*margin-bottom: 20px; /* Espaçamento abaixo do título da seção */
 }
 
 /* Ajustes específicos para container-fluid.mt-5 */
@@ -174,3 +174,26 @@ text-align: center; /* Centralização do título */
     }
 }
 
+
+.section-title-button {
+  background: none;
+  border: none;
+
+  font-size: 1.75rem; /* Ajuste o tamanho da fonte conforme necessário */
+  font-weight: bold;
+  color: inherit; /* Herda a cor do texto ao redor */
+  cursor: pointer;
+
+  color: white;
+
+  border-radius: 5px;
+  /* Novo estilo para ocupar 100% da largura */
+  width: 100%;
+  display: block; /* Garante que o elemento seja tratado como um bloco e possa expandir em largura */
+  text-align: center; /* Centraliza o texto dentro do botão */
+
+}
+
+.section-title-button:focus {
+  outline: none; /* Remove o contorno ao focar no botão */
+}

@@ -3,10 +3,6 @@
 
 global $wpdb;
 
-
-
-
-
 // Função para recuperar as informações do paciente
 function get_paciente_info($paciente_id) {
     global $wpdb;
@@ -56,9 +52,7 @@ include 'modal/modal_anamnese.php';
 
 <!-- Incluindo Bootstrap CSS -->
 
-
-
-
+<!-- Script jQuery para submissão do formulário via AJAX -->
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('#formAdicionarAtendimento').on('submit', function(e) {
@@ -74,26 +68,19 @@ include 'modal/modal_anamnese.php';
                     formData: formData // Dados do formulário serializados
                 },
                 success: function(response) {
-                    if(response.success) {
+                    if (response.success) {
                         alert(response.data.message); // Exibe mensagem de sucesso
                     } else {
                         alert(response.data.message); // Exibe mensagem de erro
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.log('Erro:', error);
+                    console.log('Erro:', error); // Exibe erro no console
                 }
             });
         });
     });
 </script>
-
-
-
-
-
-a 
-<hr>
 
 <!-- Incluindo Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -102,195 +89,168 @@ a
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
+<!-- Accordion para exibir as informações -->
 <div class="accordion" id="accordionExample">
 
-  <!-- Card 1 -->
-  <div class="col-md-11 mb-4 mx-auto">
-    <div class=section-title" id="headingOne">
-      <h5 class="section-title text-center d-flex justify-content-between align-items-center"">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Informação Clínica
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-11 mb-4 mx-auto">
-            <div class="widget-container p-4 border rounded shadow-sm bg-light w-100">
-              <?php
-              // Exibe informações clínicas do paciente selecionado
-              if ($paciente_info) {
-                  echo '<div class="patient-info">';
-                  echo '<table class="table table-bordered table-striped">';
-                  echo '<tbody>';
-
-                  echo '<tr>';
-                  echo '<th>' . __('Responsável Financeiro:', 'pronto-psi') . '</th>';
-                  echo '<td>' . esc_html($paciente_info->responsavel_financeiro) . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                  echo '<th>' . __('Motivo da Consulta:', 'pronto-psi') . '</th>';
-                  echo '<td>' . esc_html($paciente_info->motivo_consulta) . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                  echo '<th>' . __('Sintomas Relatados:', 'pronto-psi') . '</th>';
-                  echo '<td>' . esc_html($paciente_info->sintomas_rel) . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                  echo '<th>' . __('Diagnóstico:', 'pronto-psi') . '</th>';
-                  echo '<td>' . esc_html($paciente_info->diagnostico) . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                  echo '<th>' . __('Tratamento Anterior:', 'pronto-psi') . '</th>';
-                  echo '<td>' . esc_html($paciente_info->tratamento_anterior) . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                  echo '<th>' . __('Medicações em Uso:', 'pronto-psi') . '</th>';
-                  echo '<td>' . esc_html($paciente_info->medicacoes_uso) . '</td>';
-                  echo '</tr>';
-
-                  echo '</tbody>';
-                  echo '</table>';
-                  echo '</div>';
-              } else {
-                  echo '<div class="alert alert-warning" role="alert">';
-                  echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
-                  echo '</div>';
-              }
-              ?>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-
-  <!-- Card 3 -->
-  <div class="card mb-3">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Grupo de itens colapsável #3
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-
-
-<!-- Seção de Seleção de Paciente -->
-<div class="container-fluid mb-12">
-    
-    
-    
-    
-    
-    
-    
-    <div class="row justify-content-center">
-        <!-- Formulário de Seleção de Paciente -->
-        <div class="col-md-3 mb-6 d-flex align-items-center">
-
-            <div class="widget-container p-3 border rounded shadow-sm w-100">
-                
-                
-                
-
-                <form id="paciente-form" method="POST" action="">
-                    <?php
-                    // Recupera a lista de pacientes da tabela pronto_psi_clientes
-                    $pacientes = $wpdb->get_results("SELECT id, full_name FROM {$wpdb->prefix}pronto_psi_clientes");
-
-                    // Função para renderizar o widget de seleção de paciente
-                    function render_select_paciente_widget($pacientes, $selected_paciente_id = null) {
-                        echo '<div class="form-group">';
-                        echo '<label for="select_paciente">' . __('Selecionar Paciente', 'pronto-psi') . '</label>';
-                        echo '<select id="select_paciente" class="form-control" name="paciente_id" required>';
-                        echo '<option value="">' . __('Selecione um paciente', 'pronto-psi') . '</option>';
-
-                        foreach ($pacientes as $paciente) {
-                            // Verifica se há um paciente pré-selecionado
-                            $selected = ($selected_paciente_id == $paciente->id) ? 'selected' : '';
-                            echo '<option value="' . esc_attr($paciente->id) . '" ' . $selected . '>' . esc_html($paciente->full_name) . '</option>';
-                        }
-
-                        echo '</select>';
-                        echo '</div>';
-                    }
-
-                    // Renderiza o widget com o paciente selecionado (se houver)
-                    render_select_paciente_widget($pacientes, $paciente_id);
-                    ?>
-                    <button type="submit" class="btn btn-primary"><?php _e('Atualizar', 'pronto-psi'); ?></button>
-                </form>
-            </div>
+    <!-- Card 1: Paciente -->
+    <div class="col-md-12 mb-4 mx-auto">
+        <div class="section-title" id="headingOne">
+            <h3 class="section-title text-center d-flex justify-content-center align-items-center">
+                <button class="section-title-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Paciente
+                </button>
+            </h3>
         </div>
 
-        <!-- Informações do Paciente -->
-        <div class="col-md-8 mb-4">
-            <h3 class="section-title text-center"><?php _e('Informações do Paciente', 'pronto-psi'); ?></h3>
-            <div class="widget-container p-4 border rounded shadow-sm bg-light">
-                <?php
-                // Exibe informações do paciente selecionado
-                if ($paciente_info) {
-                    echo '<div class="patient-info">';
-                    echo '<table class="table table-bordered table-striped">';
-                    echo '<tbody>';
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-4 mx-auto">
 
-                    echo '<tr>';
-                    echo '<th>' . __('Nome Completo:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->full_name) . '</td>';
+                        <!-- Seção de Seleção de Paciente -->
+                        <div class="container-fluid mb-12">
+                            <div class="row justify-content-center">
 
-                    echo '<th>' . __('CPF:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->cpf) . '</td>';
-                    echo '</tr>';
+                                <!-- Formulário de Seleção de Paciente -->
+                                <div class="col-md-3 mb-6 d-flex align-items-center">
+                                    <div class="widget-container p-3 border rounded shadow-sm w-100">
+                                        <form id="paciente-form" method="POST" action="">
+                                            <?php
+                                            // Recupera a lista de pacientes da tabela pronto_psi_clientes
+                                            $pacientes = $wpdb->get_results("SELECT id, full_name FROM {$wpdb->prefix}pronto_psi_clientes");
 
-                    echo '<tr>';
-                    echo '<th>' . __('Gênero:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->genero) . '</td>';
+                                            // Função para renderizar o widget de seleção de paciente
+                                            function render_select_paciente_widget($pacientes, $selected_paciente_id = null) {
+                                                echo '<div class="form-group">';
+                                                echo '<label for="select_paciente">' . __('Selecionar Paciente', 'pronto-psi') . '</label>';
+                                                echo '<select id="select_paciente" class="form-control" name="paciente_id" required>';
+                                                echo '<option value="">' . __('Selecione um paciente', 'pronto-psi') . '</option>';
+                                                foreach ($pacientes as $paciente) {
+                                                    // Verifica se há um paciente pré-selecionado
+                                                    $selected = ($selected_paciente_id == $paciente->id) ? 'selected' : '';
+                                                    echo '<option value="' . esc_attr($paciente->id) . '" ' . $selected . '>' . esc_html($paciente->full_name) . '</option>';
+                                                }
+                                                echo '</select>';
+                                                echo '</div>';
+                                            }
 
-                    echo '<th>' . __('Estado Civil:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->estado_civil) . '</td>';
-                    echo '</tr>';
+                                            // Renderiza o widget com o paciente selecionado (se houver)
+                                            render_select_paciente_widget($pacientes, $paciente_id);
+                                            ?>
+                                            <button type="submit" class="btn btn-primary"><?php _e('Atualizar', 'pronto-psi'); ?></button>
+                                        </form>
+                                    </div>
+                                </div>
 
-                    echo '<tr>';
-                    echo '<th>' . __('Plano de Saúde:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->plano_saude) . '</td>';
+                                <!-- Informações do Paciente -->
+                                <div class="col-md-8 mb-4">
+                                    <div class="widget-container p-4 border rounded shadow-sm bg-light">
+                                        <?php
+                                        // Exibe informações do paciente selecionado
+                                        if ($paciente_info) {
+                                            echo '<div class="patient-info">';
+                                            echo '<table class="table table-bordered table-striped">';
+                                            echo '<tbody>';
+                                            echo '<tr>';
+                                            echo '<th>' . __('Nome Completo:', 'pronto-psi') . '</th>';
+                                            echo '<td>' . esc_html($paciente_info->full_name) . '</td>';
+                                            echo '<th>' . __('CPF:', 'pronto-psi') . '</th>';
+                                            echo '<td>' . esc_html($paciente_info->cpf) . '</td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                            echo '<th>' . __('Gênero:', 'pronto-psi') . '</th>';
+                                            echo '<td>' . esc_html($paciente_info->genero) . '</td>';
+                                            echo '<th>' . __('Estado Civil:', 'pronto-psi') . '</th>';
+                                            echo '<td>' . esc_html($paciente_info->estado_civil) . '</td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                            echo '<th>' . __('Plano de Saúde:', 'pronto-psi') . '</th>';
+                                            echo '<td>' . esc_html($paciente_info->plano_saude) . '</td>';
+                                            echo '<th>' . __('Cartão SUS:', 'pronto-psi') . '</th>';
+                                            echo '<td>' . esc_html($paciente_info->cartao_sus) . '</td>';
+                                            echo '</tr>';
+                                            echo '</tbody>';
+                                            echo '</table>';
+                                            echo '</div>';
+                                        } else {
+                                            echo '<div class="alert alert-warning" role="alert">';
+                                            echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
+                                            echo '</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
 
-                    echo '<th>' . __('Cartão SUS:', 'pronto-psi') . '</th>';
-                    echo '<td>' . esc_html($paciente_info->cartao_sus) . '</td>';
-                    echo '</tr>';
+                            </div> <!-- Fim da linha interna -->
+                        </div> <!-- Fim do container-fluid -->
+                    </div> <!-- Fim da coluna -->
+                </div> <!-- Fim da linha -->
+            </div> <!-- Fim do card-body -->
+        </div> <!-- Fim do collapseOne -->
+    </div> <!-- Fim do Card 1 -->
 
-                    echo '</tbody>';
-                    echo '</table>';
-                    echo '</div>';
-                } else {
-                    echo '<div class="alert alert-warning" role="alert">';
-                    echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
-                    echo '</div>';
-                }
-                ?>
-            </div>
+    <!-- Card 2: Informação Clínica -->
+    <div class="col-md-12 mb-4 mx-auto">
+        <div class="section-title" id="heading2">
+            <h3 class="section-title text-center d-flex justify-content-center align-items-center">
+                <button class="section-title-button" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                    Informação Clínica
+                </button>
+            </h3>
         </div>
-    </div>
-<hr>
+
+        <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-4 mx-auto">
+                        <div class="widget-container p-4 border rounded shadow-sm bg-light w-100">
+                            <?php
+                            // Exibe informações clínicas do paciente selecionado
+                            if ($paciente_info) {
+                                echo '<div class="patient-info">';
+                                echo '<table class="table table-bordered table-striped">';
+                                echo '<tbody>';
+                                echo '<tr>';
+                                echo '<th>' . __('Responsável Financeiro:', 'pronto-psi') . '</th>';
+                                echo '<td>' . esc_html($paciente_info->responsavel_financeiro) . '</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                echo '<th>' . __('Motivo da Consulta:', 'pronto-psi') . '</th>';
+                                echo '<td>' . esc_html($paciente_info->motivo_consulta) . '</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                echo '<th>' . __('Sintomas Relatados:', 'pronto-psi') . '</th>';
+                                echo '<td>' . esc_html($paciente_info->sintomas_rel) . '</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                echo '<th>' . __('Diagnóstico:', 'pronto-psi') . '</th>';
+                                echo '<td>' . esc_html($paciente_info->diagnostico) . '</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                echo '<th>' . __('Tratamento Anterior:', 'pronto-psi') . '</th>';
+                                echo '<td>' . esc_html($paciente_info->tratamento_anterior) . '</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                echo '<th>' . __('Medicações em Uso:', 'pronto-psi') . '</th>';
+                                echo '<td>' . esc_html($paciente_info->medicacoes_uso) . '</td>';
+                                echo '</tr>';
+                                echo '</tbody>';
+                                echo '</table>';
+                                echo '</div>';
+                            } else {
+                                echo '<div class="alert alert-warning" role="alert">';
+                                echo __('Nenhuma informação clínica disponível para o paciente selecionado.', 'pronto-psi');
+                                echo '</div>';
+                            }
+                            ?>
+                        </div> <!-- Fim do widget-container -->
+                    </div> <!-- Fim da coluna -->
+                </div> <!-- Fim da linha -->
+            </div> <!-- Fim do card-body -->
+        </div> <!-- Fim do collapseTwo -->
+    </div> <!-- Fim do Card 2 -->
+
+</div> <!-- Fim do accordion -->
 
 
 
@@ -316,7 +276,7 @@ a
                 echo '<div class="patient-info">';
                 echo '<table class="table table-bordered table-striped">';
                 echo '<tbody>';
-                
+
                 // Loop para exibir os dados
                 foreach ([
                     __('Responsável Financeiro:', 'pronto-psi') => $paciente_info->responsavel_financeiro,
@@ -331,7 +291,7 @@ a
                     echo '<td>' . esc_html($value) . '</td>';
                     echo '</tr>';
                 }
-                
+
                 echo '</tbody>';
                 echo '</table>';
                 echo '</div>';
@@ -555,4 +515,3 @@ jQuery(document).ready(function($) {
 
 
 </script>
-
