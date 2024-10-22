@@ -27,6 +27,7 @@ include 'modal/modal_atendimento.php';
 include 'modal/modal_financeiro.php';
 include 'modal/modal_evolucao.php';
 include 'modal/modal_anamnese.php';
+
 ?>
 
 
@@ -48,6 +49,7 @@ include 'modal/modal_anamnese.php';
     <div class="title-highlight mb-0">
         <h1 class="title-highlight"><?php _e('Gerenciamento de Atendimentos', 'pronto-psi'); ?></h1>
     </div>
+</div>
 <hr>
 
 <!-- Incluindo Bootstrap CSS -->
@@ -252,77 +254,23 @@ include 'modal/modal_anamnese.php';
 
 </div> <!-- Fim do accordion -->
 
-
-
-
-<!-- jQuery (Necessário para o Bootstrap JS) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<hr>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-<div class="row">
-    <!-- Informação Clínica -->
-    <div class="col-md-11 mb-4 mx-auto">
-        <h3 class="section-title text-center d-flex justify-content-between align-items-center">
-            <span><?php _e('Informação Clínica', 'pronto-psi'); ?></span>
-            <a class="btn btn-link" data-bs-toggle="collapse" href="#infoClinica" role="button" aria-expanded="false" aria-controls="infoClinica">
-                <i class="bi bi-chevron-down" id="icon-infoClinica"></i>
-            </a>
-        </h3>
-        <div class="collapse widget-container p-4 border rounded shadow-sm bg-light w-100" id="infoClinica">
-            <?php
-            // Exibe informações clínicas do paciente selecionado
-            if (isset($paciente_info) && !empty($paciente_info)) {
-                echo '<div class="patient-info">';
-                echo '<table class="table table-bordered table-striped">';
-                echo '<tbody>';
-
-                // Loop para exibir os dados
-                foreach ([
-                    __('Responsável Financeiro:', 'pronto-psi') => $paciente_info->responsavel_financeiro,
-                    __('Motivo da Consulta:', 'pronto-psi') => $paciente_info->motivo_consulta,
-                    __('Sintomas Relatados:', 'pronto-psi') => $paciente_info->sintomas_rel,
-                    __('Diagnóstico:', 'pronto-psi') => $paciente_info->diagnostico,
-                    __('Tratamento Anterior:', 'pronto-psi') => $paciente_info->tratamento_anterior,
-                    __('Medicações em Uso:', 'pronto-psi') => $paciente_info->medicacoes_uso,
-                ] as $label => $value) {
-                    echo '<tr>';
-                    echo '<th>' . esc_html($label) . '</th>';
-                    echo '<td>' . esc_html($value) . '</td>';
-                    echo '</tr>';
-                }
-
-                echo '</tbody>';
-                echo '</table>';
-                echo '</div>';
-            } else {
-                echo '<div class="alert alert-warning" role="alert">';
-                echo __('Nenhum paciente selecionado ou paciente não encontrado.', 'pronto-psi');
-                echo '</div>';
-            }
-            ?>
-        </div>
-    </div>
-</div>
-
-</div>
 
 
+<!-- Abas Horizontais -->
 
-
-
-
-<hr>
-
-    <!-- Abas Horizontais -->
+<div>
     <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">
+            <a class="nav-link active" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="true">
                 <?php _e('Evolução', 'pronto-psi'); ?>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="true">
+            <a class="nav-link" id="atendimentos-tab" data-toggle="tab" href="#atendimentos" role="tab" aria-controls="atendimentos" aria-selected="false">
                 <?php _e('Atendimentos', 'pronto-psi'); ?>
             </a>
         </li>
@@ -354,22 +302,52 @@ include 'modal/modal_anamnese.php';
 
 
         </div>
+<!-- Aba Evolução -->
+<div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
+    <h3 class="section-title"><?php _e('Últimos Registros de Atendimento', 'pronto-psi'); ?></h3>
 
-        <!-- Aba Evolução -->
-        <div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
-            <h4 class="tab-title"><?php _e('Evolução', 'pronto-psi'); ?></h4>
-            <button class="btn btn-primary" id="btn-adicionar-evolucao"><?php _e('Adicionar Evolução', 'pronto-psi'); ?></button>
-        </div>
+    <!-- Botão para Adicionar Evolução -->
+    <button class="btn btn-primary" id="btn-adicionar-evolucao"><?php _e('Adicionar Evolução', 'pronto-psi'); ?></button>
 
-        <!-- Aba Anamnese -->
-        <div class="tab-pane fade" id="anamnesi" role="tabpanel" aria-labelledby="anamnesi-tab">
-
-            <button class="btn btn-primary" id="btn-adicionar-anamnesi"><?php _e('Adicionar Anamnese', 'pronto-psi'); ?></button>
-
-        </div>
+    <!-- Conteúdo da Aba de Evolução -->
+    <div class="mt-5">
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th><?php _e('Data', 'pronto-psi'); ?></th>
+                    <th><?php _e('Horário Início', 'pronto-psi'); ?></th>
+                    <th><?php _e('Horário Término', 'pronto-psi'); ?></th>
+                    <th><?php _e('Tipo de Atendimento', 'pronto-psi'); ?></th>
+                    <th><?php _e('Duração', 'pronto-psi'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($atendimentos)) : ?>
+                    <?php foreach ($atendimentos as $atendimento) : ?>
+                        <tr>
+                            <td><?php echo esc_html($atendimento->data_atendimento); ?></td>
+                            <td><?php echo esc_html($atendimento->horario_inicio); ?></td>
+                            <td><?php echo esc_html($atendimento->horario_termino); ?></td>
+                            <td><?php echo esc_html($atendimento->tipo_atendimento); ?></td>
+                            <td><?php echo esc_html($atendimento->duracao_atendimento); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="5"><?php _e('Nenhum atendimento encontrado.', 'pronto-psi'); ?></td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<!-- Aba Anamnese -->
+<div class="tab-pane fade" id="anamnesi" role="tabpanel" aria-labelledby="anamnesi-tab">
+    <!-- Botão para Adicionar Anamnese -->
+    <button class="btn btn-primary" id="btn-adicionar-anamnesi"><?php _e('Adicionar Anamnese', 'pronto-psi'); ?></button>
 </div>
+
 
 <script>
 jQuery(document).ready(function($) {
@@ -512,6 +490,4 @@ jQuery(document).ready(function($) {
         });
     });
 });
-
-
 </script>

@@ -70,7 +70,7 @@ vertical-align: middle; /* Alinhar o texto verticalmente ao meio */
 .section-title {
 background-color: #49698b; /* Verde para os títulos das seções */
 color: white;
-padding: 5px;
+padding: 3px;
 border-radius: 5px;
 /*margin-bottom: 20px; /* Espaçamento abaixo do título da seção */
 }
