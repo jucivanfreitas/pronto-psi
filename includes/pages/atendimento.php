@@ -92,7 +92,7 @@ include 'modal/modal_anamnese.php';
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
 <!-- Accordion para exibir as informações -->
-<div class="accordion" id="accordionExample">
+<div class="accordion" id="accordionAtendimento">
 
     <!-- Card 1: Paciente -->
     <div class="col-md-12 mb-4 mx-auto">
@@ -104,7 +104,7 @@ include 'modal/modal_anamnese.php';
             </h3>
         </div>
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionAtendimento">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 mb-4 mx-auto">
@@ -201,7 +201,7 @@ include 'modal/modal_anamnese.php';
             </h3>
         </div>
 
-        <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+        <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionAtendimento">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 mb-4 mx-auto">
@@ -251,6 +251,92 @@ include 'modal/modal_anamnese.php';
             </div> <!-- Fim do card-body -->
         </div> <!-- Fim do collapseTwo -->
     </div> <!-- Fim do Card 2 -->
+   <!-- Card 3: Informação Clínica -->
+<div class="col-md-12 mb-4 mx-auto">
+    <div class="section-title" id="heading3">
+        <h3 class="section-title text-center d-flex justify-content-center align-items-center">
+            <button class="section-title-button" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                EVOLUÇÕES
+            </button>
+        </h3>
+    </div>
+
+    <div id="collapse3" class="collapse show" aria-labelledby="heading3" data-parent="#accordionAtendimento">
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-12 mb-4 mx-auto">
+                <div class="mt-3 d-flex">
+                    <!-- Botão Adicionar Evolução -->
+                    <div class="mr-3">
+                        <button class="btn btn-primary" id="btn-adicionar-evolucao">
+                            <?php _e('Adicionar Evolução', 'pronto-psi'); ?>
+                        </button>
+                    </div>
+
+                   <!-- Tabela -->
+<div class="flex-grow-1">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th><?php _e('Num Prontuário', 'pronto-psi'); ?></th>
+                <th><?php _e('Tipo Atendimento', 'pronto-psi'); ?></th>
+                <th><?php _e('Resumo da Sessão', 'pronto-psi'); ?></th>
+                <th><?php _e('Reações Observadas', 'pronto-psi'); ?></th>
+                <th><?php _e('Evolução e Melhorias', 'pronto-psi'); ?></th>
+                <th><?php _e('Observação Geral', 'pronto-psi'); ?></th>
+                <th><?php _e('Data', 'pronto-psi'); ?></th>
+                <th><?php _e('Horário Início', 'pronto-psi'); ?></th>
+                <th><?php _e('Horário Término', 'pronto-psi'); ?></th>
+                <th><?php _e('Duração', 'pronto-psi'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if ($paciente_info) : ?>
+                <?php
+                // Filtra os atendimentos de acordo com o prontuario_id do paciente
+                $atendimentos_filtrados = array_filter($atendimentos, function($atendimento) use ($paciente_info) {
+                    return $atendimento->prontuario_id == $paciente_info->id;
+                });
+
+                // Exibe os atendimentos filtrados
+                if (!empty($atendimentos_filtrados)) :
+                    foreach ($atendimentos_filtrados as $atendimento) : ?>
+                        <tr>
+                            <td><?php echo esc_html($atendimento->id); ?></td>
+                            <td><?php echo esc_html($atendimento->tipo_atendimento); ?></td>
+                            <td><?php echo esc_html($atendimento->resumo_atendimento); ?></td>
+                            <td><?php echo esc_html($atendimento->reacoes_respostas); ?></td>
+                            <td><?php echo esc_html($atendimento->pontos_pos_e_melhorias); ?></td>
+                            <td><?php echo esc_html($atendimento->observacoes); ?></td>
+                            <td><?php echo esc_html($atendimento->data_atendimento); ?></td>
+                            <td><?php echo esc_html($atendimento->horario_inicio); ?></td>
+                            <td><?php echo esc_html($atendimento->horario_termino); ?></td>
+                            <td><?php echo esc_html($atendimento->duracao_atendimento); ?></td>
+                        </tr>
+                    <?php endforeach;
+                else : ?>
+                    <tr>
+                        <td colspan="10"><?php _e('Nenhum atendimento encontrado.', 'pronto-psi'); ?></td>
+                    </tr>
+                <?php endif; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="10"><?php _e('Nenhum atendimento encontrado.', 'pronto-psi'); ?></td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+                </div>
+
+                </div> <!-- Fim da coluna -->
+            </div> <!-- Fim da linha -->
+        </div> <!-- Fim do card-body -->
+    </div> <!-- Fim do collapse3 -->
+</div> <!-- Fim do Card 3 -->
+
 
 </div> <!-- Fim do accordion -->
 
@@ -302,50 +388,27 @@ include 'modal/modal_anamnese.php';
 
 
         </div>
-<!-- Aba Evolução -->
-<div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
-    <h3 class="section-title"><?php _e('Últimos Registros de Atendimento', 'pronto-psi'); ?></h3>
 
-    <!-- Botão para Adicionar Evolução -->
-    <button class="btn btn-primary" id="btn-adicionar-evolucao"><?php _e('Adicionar Evolução', 'pronto-psi'); ?></button>
+        <!-- Aba Evolução -->
 
-    <!-- Conteúdo da Aba de Evolução -->
-    <div class="mt-5">
-        <table class="table table-striped table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th><?php _e('Data', 'pronto-psi'); ?></th>
-                    <th><?php _e('Horário Início', 'pronto-psi'); ?></th>
-                    <th><?php _e('Horário Término', 'pronto-psi'); ?></th>
-                    <th><?php _e('Tipo de Atendimento', 'pronto-psi'); ?></th>
-                    <th><?php _e('Duração', 'pronto-psi'); ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($atendimentos)) : ?>
-                    <?php foreach ($atendimentos as $atendimento) : ?>
-                        <tr>
-                            <td><?php echo esc_html($atendimento->data_atendimento); ?></td>
-                            <td><?php echo esc_html($atendimento->horario_inicio); ?></td>
-                            <td><?php echo esc_html($atendimento->horario_termino); ?></td>
-                            <td><?php echo esc_html($atendimento->tipo_atendimento); ?></td>
-                            <td><?php echo esc_html($atendimento->duracao_atendimento); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="5"><?php _e('Nenhum atendimento encontrado.', 'pronto-psi'); ?></td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+        <div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
+        <h3 class="section-title"><?php _e('Últimos Registros de Atendimento', 'pronto-psi'); ?></h3>
+                    <button class="btn btn-primary" id="btn-adicionar-evolucao"><?php _e('Adicionar Evolução', 'pronto-psi'); ?></button>
+                    <!-- conteudo Aba de Evolução -->
+
+            <hr>
+
+
+
+        </div>
+
+        <!-- Aba Anamnese -->
+        <div class="tab-pane fade" id="anamnesi" role="tabpanel" aria-labelledby="anamnesi-tab">
+
+            <button class="btn btn-primary" id="btn-adicionar-anamnesi"><?php _e('Adicionar Anamnese', 'pronto-psi'); ?></button>
+
+        </div>
     </div>
-</div>
-
-<!-- Aba Anamnese -->
-<div class="tab-pane fade" id="anamnesi" role="tabpanel" aria-labelledby="anamnesi-tab">
-    <!-- Botão para Adicionar Anamnese -->
-    <button class="btn btn-primary" id="btn-adicionar-anamnesi"><?php _e('Adicionar Anamnese', 'pronto-psi'); ?></button>
 </div>
 
 
